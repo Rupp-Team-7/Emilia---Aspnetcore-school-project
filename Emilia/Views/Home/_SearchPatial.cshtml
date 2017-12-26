@@ -1,0 +1,41 @@
+﻿
+<h3 class=" p-2">Looking for good!</h3>
+<hr />
+<form action="/" method="post">
+    <div class="form-inline">
+        <input class="form-control w-75" type="search" placeholder="Search" />
+        <input class="btn btn-group-vertical ml-1" type="submit" value="GO" />
+    </div>
+   
+    <label class="form-control-label">Category:</label>
+    <select class="form-control" id="category" name="category">
+        <option value="all">All</option>
+        <option value="shirt">Shirt</option>
+        <option value="shoe">shoe</option>
+        <option value="cap">Cap</option>
+        <option value="bag">Bag</option>
+    </select>
+
+    <label class="form-control-label">Price Range:</label>
+    <select class="form-control" id="price" name="price">
+        <option value="all">All</option>
+        <option value="lowest">Lowest</option>
+        <option value="1">$1-$10</option>
+        <option value="2">$10-$30</option>
+        <option value="3">Highest</option>
+    </select>
+</form>
+
+<hr />
+<div>
+    <a data-toggle="collapse" href="#category_collapse">Categories &gt;&gt;</a>
+    <div class="collapse" id="category_collapse">
+        <ul class=" list-unstyled list-group-flush">
+            <li class="list-group-item"><a class="btn-link" href="#">Shirt</a></li>
+            <li class="list-group-item"><a class="btn-link" href="#">Shoes</a></li>
+            <li class="list-group-item"><a class="btn-link" href="#">Bags</a></li>
+            <li class="list-group-item"><a class="btn-link" href="#">Caps</a></li>
+            <li class="list-group-item"><a class="btn-link" href="#">Trouser</a></li>
+        </ul>
+    </div>
+</div>

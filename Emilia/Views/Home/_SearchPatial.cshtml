@@ -1,7 +1,7 @@
 ﻿
 <h3 class=" p-2">Looking for good!</h3>
 <hr />
-<form action="/" method="post">
+<form asp-action="Search" asp-controller="home" method="GET">
     <div class="form-inline">
         <input class="form-control w-75" type="search" placeholder="Search" />
         <input class="btn btn-group-vertical ml-1" type="submit" value="GO" />
@@ -29,7 +29,7 @@
 <hr />
 <div>
     <a data-toggle="collapse" href="#category_collapse">Categories &gt;&gt;</a>
-    <div class="collapse" id="category_collapse">
+    <div class="collapse show" id="category_collapse">
         <ul class=" list-unstyled list-group-flush">
             <li class="list-group-item"><a class="btn-link" href="#">Shirt</a></li>
             <li class="list-group-item"><a class="btn-link" href="#">Shoes</a></li>

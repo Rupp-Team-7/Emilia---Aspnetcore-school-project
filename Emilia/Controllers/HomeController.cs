@@ -5,27 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Emilia.Models;
+using Emilia.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Emilia.Controllers
 {
     public class HomeController : Controller
     {
+
+       
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Search()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

@@ -1,53 +1,54 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿ @{ ViewData["Title"] = "Index"; }
 
 
+<div class="row">
+    <div class="col-sm-9 ">
 
-<div class="banner">
-    <img class="img-fluid" src="~/images/533007 (1).png" />
-    <div class="banner-over">
-        <h2 class="banner-text">On sale: 20% OFF</h2>
-    </div>
-</div>
-
-<div class="mt-2">
-    <h3 class="sec-head-text">New Arrival <span class="float-right">more</span></h3>
-    <div class="row">
-        @for (var i = 0; i < 12; i++)
-        {
-            <div class="col-sm-3 mt-1 p-0">
-                <div class="card">
-                    <img class="card-img-top" src="~/images/533007 (1).png" />
-                    <div class="card-body">
-                        <h5 class="card-title">$2.0</h5>
-                        <p class="card-text">New Item set just arrive in a day...</p>
-                        <button class="btn btn-group-sm btn-primary">Order</button>
-                        <span class=""></span>
-                    </div>
-                </div>
+        <div class="banner">
+            <img class="img-fluid" src="~/images/533007 (1).png" />
+            <div class="banner-over">
+                <h2 class="banner-text">On sale: 20% OFF</h2>
             </div>
-        }
-       
-    </div>
-</div>
+        </div>
 
-<div class="mt-2">
-    <h3 class="sec-head-text">Best Seller</h3>
-    <div class="row">
-            @for (var i = 0; i < 6; i++)
-            {
-                <div class="col-sm-2 ">
+        <div class="mt-2">
+            <h3 class="sec-head-text">New Arrival
+                <span class="float-right">more</span>
+            </h3>
+            <div class="row">
+                @for (var i = 0; i< 8; i++) { 
+                    <div class="col-sm-3 mt-1 p-0">
+                        <div class="card">
+                            <img class="card-img-top" src="~/images/533007 (1).png" />
+                            <div class="card-body">
+                                <h5 class="card-title">$2.0</h5>
+                                <p class="card-text">New Item set just arrive in a day...</p>
+                                <button class="btn btn-group-sm btn-primary">Order</button>
+                                <span class=""></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    <div class="mt-2">
+        <h3 class="sec-head-text">Best Seller</h3>
+        <div class="h-box">
+            <div class="h-container">
+                @for(var i = 0; i< 10; i++){ <div class="h-block mr-2">
                     <img class="img-fluid rounded-circle" src="~/images/002.jpg" />
-                    <p class="text-center"><b>Seller @String.Format("00{0}", i)</b></p>
-                </div>
-               
-            } 
+                    <p class="text-center">
+                        <b>Seller @String.Format("00{0}", i)</b>
+                    </p>
+            </div>
+            }
+        </div>
     </div>
 </div>
 
-
-@section side_col{
-    @await Html.PartialAsync("_SearchPatial")
-}
+</div>
+    <div class="col-sm-3">
+        @await Html.PartialAsync("_SearchPatial")
+    </div>
+</div>

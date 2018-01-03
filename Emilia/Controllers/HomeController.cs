@@ -14,12 +14,13 @@ namespace Emilia.Controllers
     {
 
        
-
+        //Get: /, /home/
         public IActionResult Index()
         {
             return View();
         }
 
+        //Get: /Search?querystring...
         public IActionResult Search()
         {
             return View();
@@ -28,6 +29,12 @@ namespace Emilia.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //GET: /home/Product/1
+        public IActionResult Product(int id)
+        {
+            return View();
         }
     }
 }

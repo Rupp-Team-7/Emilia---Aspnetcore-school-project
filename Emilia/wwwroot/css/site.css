@@ -98,3 +98,41 @@
     height: auto;
     z-index: 100;
 } */
+
+.img-group-wrapper {
+    margin: 4px auto;
+    padding: 5px auto;
+}
+
+.img-inline {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#pro_img {
+    margin: 2px 0;
+}
+#pro_img .img-inline {
+    width: 23.51%;
+    margin-bottom: 3px;
+}
+
+.snipper {
+    padding: 8px;
+    margin: 15px auto;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.411);
+}
+.snipper_img {
+    width: 20%;
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+.snipper_text {
+    width: 60%;
+    margin-left: 15px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}

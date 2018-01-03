@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-sm-7">
+        <img class="img-fluid" src="~/images/533007 (1).png" alt="">
+        <div id="pro_img" class="img-group-wrapper">
+        @for(var i = 0; i<=5; i++)
+        {
+            <img class="img-inline" src="~/images/533007 (1).png">
+        }
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <h2 class="card-title">{Product Name}</h2>
+        <h4 class="card-title">price: ${Price}</h4>
+        <p class="card-text">product description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vero sed quae neque placeat! Odit repellendus, totam excepturi minus eligendi sequi inventore, voluptates possimus vitae aut quo ipsa sapiente eos.</p>
+
+        <ul class="list-group">
+            <li class=" d-flex list-group-item justify-content-between align-items-center">
+                <span>Product ID</span><span>{Product id}</span>
+            </li>
+            <li class="d-flex list-group-item justify-content-between align-items-center">
+                <span>Name</span><span>{Product Name}</span>
+            </li>
+            <li class=" d-flex list-group-item justify-content-between align-items-center">
+                <span>Made in</span><span>{Product origin}</span>
+            </li>
+            <li class=" d-flex list-group-item justify-content-between align-items-center">
+                <span>Material</span><span>{Product material}</span>
+            </li>
+            <li class=" d-flex list-group-item justify-content-between align-items-center">
+                    <span>Seller</span><span><a href="go-to-seller-shop-page">{Seller name}</a></span>
+                </li>
+            <li class=" d-flex list-group-item  align-items-center">
+                <span>Category:</span>
+                <span>
+                        &emsp;
+                    <a href="/home/search?category=shirt">Shirt</a>&emsp;<a href="/home/search?category=exclusive">exclusive</a>&emsp;<a href="/home/search?category=limited">limited</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="cleafix"></div>
+    <div class="col-sm-6">
+            <h3>Order</h3>
+        <div class="snipper">
+            <img class="snipper_img" src="~/images/533007 (1).png" alt="">
+            <div class="snipper_text">
+                <h6>Product Name</h6>
+                <p>Unit price : ${price}</p>
+            </div>
+        </div>
+        <div>
+                <h6>Total price: ${Total Price}</h6>
+            <form action="" class="form-inline w-100">
+                <input type="hidden" name="productID" value="{ProductID}">
+                <input type="hidden" name="sellerID" value="{SellerID">
+                
+                <label class="form-label mr-2" for="quanity">Quanity:</label>
+                <input class="form-control" id="quanity" type="number" value="1">
+                <input class="btn btn-md ml-2" type="submit" value="Purchase"> 
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Emilia</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -18,60 +17,46 @@
 
     @RenderSection("Style",required: false)
 </head>
-<body class="body">
-    <!-- @*<nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Emilia</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+<body>
+
+    <div class="wrapper">
+        <nav id="dash-side" class="">
+        <nav class="navbar navbar-expand-lg bg-success pl-1 ">
+            <a style="color:white;" class="navbar-brand" href="/home/index">Back to Home</a>
+        </nav>
+        
+        <!-- <img src="~/images/002.jpg" width="150" class="d-block mr-auto ml-auto"  alt=""> -->
+            
+            <div>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="nav-link active">Product</a></li>
+                    <li><a href="#" class="nav-link">Order</a></li>
+                    <li><a href="#" class="nav-link">Promotion</a></li>
+                    <li><a href="#" class="nav-link">My Shop</a></li>
                 </ul>
-                @await Html.PartialAsync("_LoginPartial")
             </div>
-        </div>
-    </nav>*@ -->
-
-
-    <nav class="navbar navbar-expand-lg bg-light fixed-top">
-        <a class="navbar-brand" href="/home/index">Let's shop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapserbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="collapserbar" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" >Home</a>
-                </li>
-            </ul>
-            @await Html.PartialAsync("_LoginPartial")
-        </div>
-    </nav>
-
-    <div class="container body-content paper-body">
-        @RenderBody()
-    </div>
-
-    <div class="container">
-        <div class="row bg-light p-lg-5">
-            <div class="col-sm-6">
-              <h3>Let's shopping</h3>
-               <p>We glad you enjoy shopping with us!</p>
-                <p>&copy; Copy Right - 2018</p>
-            </div>
-            <div class="col-sm-6"></div>
-        </div>
-    </div>
+        </nav>
     
+        <div id="dash-main">
+            
+            <nav class="navbar navbar-expand-lg bg-light pl-1 ">
+                <button id="btnNav" class="dash-btn">&larr;</button>
+                <span class="pr-2">|</span> <a class="navbar-brand" href="/dashboard/index">Dashboard</a>
+                <div id="collapserbar" class="collapse navbar-collapse">
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </nav>
+
+            <div class="container-fluid pt-2">
+                    @RenderBody()
+            </div>
+            
+        </div>
+    </div>
+
+   
+    
+ 
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -98,8 +83,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-
-
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿body {
+﻿.body {
     padding-top: 80px;
     padding-bottom: 20px;
 }
@@ -136,3 +136,54 @@
     vertical-align: top;
     text-align: left;
 }
+
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+#dash-main {
+    width: 100%;
+}
+
+#dash-side {
+   min-width: 250px;
+   max-height: 250px;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+    border-right: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+#dash-side.active {
+    margin-left: -250px;
+}
+
+@media screen and (max-width: 768px) {
+    #dash-side{
+        margin-left: -250px;
+    }
+
+    #dash-side.active {
+        margin-left: 0;
+    }
+}
+
+
+.dash-btn {
+    border: none;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0 15px 0 8px;
+    font-weight: bold;
+    color: blue;
+    background: transparent;
+}
+.dash-btn:hover {
+background-color: rgba(0, 0, 255, 0.575);
+color: white;
+}
+.dash-nav {
+    padding-left: 0;
+}
+

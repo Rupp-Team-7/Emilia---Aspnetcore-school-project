@@ -11,12 +11,12 @@ namespace Emilia.Controllers
     {
         private ApplicationDbContext db;
 
-        public ProductsController(ApplicationDbContext db )
+        public ProductController(ApplicationDbContext db )
         {
             this.db = db;
         }
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }

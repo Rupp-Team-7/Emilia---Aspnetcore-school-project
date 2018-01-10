@@ -7,7 +7,7 @@ using Emilia.Data;
 
 namespace Emilia.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
         private ApplicationDbContext db;
 
@@ -16,12 +16,9 @@ namespace Emilia.Controllers
             this.db = db;
         }
 
-        //Get: /Products/Detail/1
-        public IActionResult Detail(int id)
+        public  IActionResult Index()
         {
-            //get a product that id relevelant
-
             return View();
-        }        
+        }
     }
 }

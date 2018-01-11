@@ -1,4 +1,4 @@
-.body {
+﻿.body {
     padding-top: 80px;
     padding-bottom: 20px;
 }
@@ -215,11 +215,14 @@ color: white;
 }
 
 #imgage_uploader {
-    border: 1px solid rgba(128, 128, 128, 0.5);
+
 
 }
 #imgage_uploader .inline_box {
-    width: 49%;
-    min-height: 25%;
+    width: 24%;
+    height: 28%;
+    margin: 1% auto;
+    min-height: 100px;
+    min-width: 75px;
     border: 1px solid rgba(128, 128, 128, 0.5);
 }

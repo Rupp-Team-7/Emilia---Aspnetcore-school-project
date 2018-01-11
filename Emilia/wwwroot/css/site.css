@@ -1,4 +1,4 @@
-﻿.body {
+.body {
     padding-top: 80px;
     padding-bottom: 20px;
 }
@@ -189,13 +189,16 @@ color: white;
 
 .uploader {
    position: relative;
-   padding: 1px;
    border: 1px solid rgba(70, 199, 160, 0.486);
    background-color: rgba(28, 146, 121, 0.6);
 }
 .uploader_input {
     width: 100%;
     opacity: 0;
+}
+.uploader_input :hover {
+    background-color: rgba(28, 146, 121, 1);
+    color: red;
 }
 .uploader_label {
     position: absolute;

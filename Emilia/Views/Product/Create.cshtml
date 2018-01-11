@@ -1,14 +1,15 @@
 @{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } 
 @await Html.PartialAsync("productNav")
 
-<form class="">
+<h3>Add new item</h3>
+<form class="form light_border" id="form_create_product">
 
     <div class=" row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 ">
             <div class="form-group row">
                 <label for="" class="col-form-label col-sm-3">Product Name:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control form-control-sm" id="name" name="name">
+                    <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="(eg. Stylish T-Shirt)">
                 </div>
             </div>
             <div class="form-group row">
@@ -23,29 +24,29 @@
                 </div>
                 <label for="" class="col-form-label col-sm-1">Tags:</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control form-control-sm" name="price">
+                    <input type="number" class="form-control form-control-sm" name="tags" placeholder="(eg. T-Shirt, couple, light)">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-form-label col-sm-3">Unit Price:</label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control form-control-sm" name="price">
+                    <input type="number" class="form-control form-control-sm" name="price" placeholder="$">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-form-label col-sm-3">Origin:</label>
                 <div class="col-sm-3">
-                    <input class="form-control form-control-sm" type="text" name="origin" id="origin">
+                    <input class="form-control form-control-sm" type="text" name="origin" id="origin" placeholder="N/A">
                 </div>
                 <label for="" class="col-form-label col-sm-2">Material:</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control form-control-sm">
+                    <input type="text" class="form-control form-control-sm" placeholder="N/A">
                 </div>
             </div>
             <!-- <div class="form-group row">
                        
                     </div> -->
-            <div class="form-group row">
+            <div class="form-group row ">
                 <label for="" class="col-form-label col-sm-3">Description:</label>
                 <div class="col-sm-8">
                     <textarea class="form-control form-control-sm" name="description" id="description" cols="30" rows="3"></textarea>
@@ -61,7 +62,7 @@
             
         </div>
 
-        <div class="col-sm-4 " id="imgage_uploader">
+        <div class="col-sm-4" id="imgage_uploader">
             <div class="uploader">
                 <input class="uploader_input" type="file" class="" id="customFile">
                 <label class="uploader_label" for="customFile">Add Photo</label>
@@ -75,11 +76,6 @@
                 <button class="btn btn-warning btn-md" type="reset">Clear</button>
             </div>
         </div>
-
-        <div class="col-sm-2">
-            
-        </div>
-        
     </div>
 
 

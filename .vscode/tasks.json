@@ -10,6 +10,26 @@
                 "${workspaceFolder}/Emilia/Emilia.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "fast build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Emilia/Emilia.csproj",
+                "--no-restore"
+            ],
+            "problemMatcher": "$msCompile"         
+        },
+        {
+            "taskName": "Restore",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

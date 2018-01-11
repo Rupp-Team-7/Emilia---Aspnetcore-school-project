@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Shop";
+}
+@await Html.PartialAsync("shopheading")
+<div class="mb-4"></div>
+<h1 style="color:rgb(235, 88, 88); font-family:monospace; font-size: 72px">Shop Name</h1>
+<div class="row">
+        @for(int i=1; i<5; i++)
+        {
+        <div class="col-sm-3">
+            <div class="card">
+                <img class="card-img-top" src="~/images/533007 (1).png" />
+                <div class="card-body">
+                    <p class="card-text">New Item set just arrive in a day...</p>
+                    <h6 class="left card-title text-danger">$2.0</h6>
+                    <button class="right btn btn-sm btn-primary">Order</button>
+                    <span class=""></span>
+                </div>
+            </div>
+        </div>
+        }
+</div>
+<!-- <nav class="navbar bg-light">
+    <div class="ml-auto">
+        <a class="btn btn-default" href="#">Products</a>
+        <a class="btn btn-default" href="#">About</a> 
+    </div>
+</nav> -->
+<!-- <div class="row">
+    
+    <div class="col-md-10">
+        <h1 class="text-center">shop's name</h1>
+    </div> 
+</div> -->
+<!-- 
+<div class="row">
+    <div class="col-md-9">
+        <img class="box" src="~/images/002.jpg" />
+        
+    </div>
+    <div class="col-md-3">
+        comment || contact || email
+    </div>
+</div> -->

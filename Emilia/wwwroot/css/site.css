@@ -249,7 +249,6 @@ button._remover {
     background-color: rgb(202, 29, 29);
     color: white;
     position: absolute;
-    font-weight: 500;
     border:none;
     z-index: 20;
 }

@@ -1,7 +1,7 @@
 @{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } @await Html.PartialAsync("productNav")
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <h3>Product list</h3>
         <div class="light_border " id="product_panel">
             <ul>
@@ -15,6 +15,7 @@
                                 <span>Shirt</span>
                                 <span>$8.5</span>
                                 <span>limited, Exclusive</span>
+                                <span>4 image</span>
                             </div>
                             <div class=" float-right">
                                 <a class="d-block fa fa-eye " asp-controller="product" asp-action="detail" asp-route-id="@i"></a>
@@ -27,5 +28,5 @@
             </ul>
         </div>
     </div>
-    <div class="col-sm-6"></div>
+    <div class="col-sm-4"></div>
 </div>

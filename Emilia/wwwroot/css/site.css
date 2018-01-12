@@ -262,7 +262,7 @@ img._product_img {
 }
 
 #product_panel {
-    height: 300px;
+    height: 380px;
     overflow-y: auto;
 }
 #product_panel > ul {

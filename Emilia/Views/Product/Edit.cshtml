@@ -1,7 +1,7 @@
 @{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } 
 @await Html.PartialAsync("productNav")
 
-<h3>Add new item</h3>
+<h3>Change product infomation</h3>
 <form class="form light_border" id="form_create_product">
 
     <div class=" row">
@@ -73,12 +73,17 @@
                 <input class="uploader_input" type="file" class="" id="customFile">
                 <label class="uploader_label" for="customFile">Add Photo</label>
             </div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-md " type="button">Publish</button>
+            @for(int i = 0; i < 5; i++)
+            {
+                 <div class="inline_box">
+                    <button type="button" class="_remover">X</button>
+                    <img class="_product_img" src="~/images/shirt.jpg"/>
+                    
+                </div>
+            }
+           
+            <div>
+                <button class="btn btn-primary btn-md " type="button">Save Change</button>
                 <button class="btn btn-default btn-md" type="reset">Clear</button>
             </div>
         </div>

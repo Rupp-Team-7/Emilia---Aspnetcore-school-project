@@ -16,12 +16,20 @@ namespace Emilia.Controllers
             this.db = db;
         }
 
+        // GET: /Product/index
         public IActionResult Index()
         {
             return View();
         }
 
+        // GET: /Product/Create
         public IActionResult Create()
+        {
+            return View();
+        }
+
+        // GET: /Product/Edit/1
+        public IActionResult Edit()
         {
             return View();
         }

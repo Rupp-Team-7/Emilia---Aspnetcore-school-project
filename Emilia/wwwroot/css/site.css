@@ -41,6 +41,10 @@
     box-shadow: 1px 1px 4px rgba(128, 128, 128, 0.8);
 }
 
+.btn, .form-control {
+    border-radius: 0;
+}
+
 .banner {
     position:relative;
 }
@@ -155,17 +159,25 @@
     border-right: 1px solid rgba(128, 128, 128, 0.5);
 }
 
-#dash-side.active {
-    margin-left: -250px;
+
+#dash-side{
+    margin-left: 0;
+    
 }
 
-@media screen and (max-width: 768px) {
-    #dash-side{
-        margin-left: -250px;
-    }
+#dash-side.active {
+    margin-left: -250px;
+    
+}
 
+
+@media screen and (min-width: 768px) {
+    #dash-side {
+        margin-left:-250px;
+    }
+    
     #dash-side.active {
-        margin-left: 0;
+        margin-left:  0px;
     }
 }
 
@@ -197,6 +209,7 @@ color: white;
    position: relative;
    border: 1px solid rgba(70, 199, 160, 0.486);
    background-color: rgba(28, 146, 121, 1);
+   
 }
 .uploader_input {
     width: 100%;
@@ -223,13 +236,28 @@ color: white;
 #imgage_uploader .inline_box {
     width: 24%;
     height: 28%;
-    margin: 1% auto;
+    margin: 2px auto;
     min-height: 100px;
     min-width: 75px;
     border: 1px solid rgba(128, 128, 128, 0.5);
     background-color: rgba(128, 128, 128, 0.2);
+    position: relative;
+    overflow-y: hidden;
+}
+
+button._remover {
+    background-color: rgb(202, 29, 29);
+    color: white;
+    position: absolute;
+    font-weight: 500;
+    border:none;
+    z-index: 20;
+}
+img._product_img {
+    width: 100%;
+    height: auto;
 }
 
 .light_border {
-    border: 1px solid rgba(128, 128, 128, 0.4);
+    border: 1px solid rgba(128, 128, 128, 0.1);
 }

@@ -8,7 +8,7 @@
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build fast",
             // If you have changed target frameworks, make sure to update the program path.
             // "program": "${workspaceFolder}/Emilia/bin/Debug/netcoreapp2.0/Emilia.dll",
             "program": "${workspaceFolder}/Emilia/bin/Debug/net461/win7-x64/Emilia.exe",

@@ -7,6 +7,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -20,7 +21,7 @@
 <body>
 
     <div class="wrapper">
-        <nav id="dash-side" class="">
+        <nav id="dash-side" class="active">
         <nav class="navbar navbar-expand-lg bg-success pl-1 ">
             <a style="color:white;" class="navbar-brand" href="/home/index">Back to Home</a>
         </nav>
@@ -29,8 +30,8 @@
             
             <div>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="nav-link active">Product</a></li>
-                    <li><a href="#" class="nav-link">Order</a></li>
+                    <li><a asp-controller='product' asp-action="index" class="nav-link active">Product</a></li>
+                    <li><a asp-controller='ordering' asp-action="detail" class="nav-link">Order</a></li>
                     <li><a href="#" class="nav-link">Promotion</a></li>
                     <li><a href="#" class="nav-link">My Shop</a></li>
                 </ul>

@@ -301,3 +301,47 @@ img._product_img {
     text-decoration: none;
     color: blue;
 }
+
+
+/* rith */
+
+.carousel{
+    margin-bottom:10px;
+}
+.wall{
+    width:100%;
+    display:inline-block;
+    background:#fff;
+    border:1px solid #d1d1d1;
+    box-shadow:#a9a9a9 1px 1px 1px ;
+    border-top-left-radius:5px;
+    border-bottom-right-radius:5px;
+    padding:10px 17px;
+    margin-bottom:10px;
+}
+.wall-head{
+    border-bottom:2px solid #dedede;
+    margin:5px;
+}
+.wall-head h3,
+.wall-footer h3{
+    margin: 2px 0 5px;
+    display: block;
+    font-size: 18px;
+    font-weight:150;
+    color: #73879C;
+}
+.wall-body {
+    margin: 2px 0 4px;
+    position: relative;
+    float: left;
+    display: block;
+    clear: both;
+    
+}
+.wall-footer {
+    position: relative;
+    float:left;
+    display: inline-block;
+    border-top: 2px solid #dedede;
+}

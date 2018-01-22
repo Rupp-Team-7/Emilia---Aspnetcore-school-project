@@ -4,11 +4,12 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "fast build",
             // If you have changed target frameworks, make sure to update the program path.
             // "program": "${workspaceFolder}/Emilia/bin/Debug/netcoreapp2.0/Emilia.dll",
             "program": "${workspaceFolder}/Emilia/bin/Debug/net461/win7-x64/Emilia.exe",
@@ -16,8 +17,9 @@
             "cwd": "${workspaceFolder}/Emilia",
             "stopAtEntry": false,
             "internalConsoleOptions": "neverOpen",
-            "launchBrowser": {
-                "enabled": false,
+            //"console": "integratedTerminal",
+           "launchBrowser": {
+                "enabled": true,
                 "args": "${auto-detect-url}",
                 "windows": {
                     "command": "cmd.exe",

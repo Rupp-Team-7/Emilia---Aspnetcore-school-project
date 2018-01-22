@@ -12,8 +12,8 @@ using System;
 namespace Emilia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171226074520_SecondEdition")]
-    partial class SecondEdition
+    [Migration("20180122160025_secondversion")]
+    partial class secondversion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,8 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<int>("CustomerID");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -55,12 +57,16 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int?>("SellerID");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -70,7 +76,51 @@ namespace Emilia.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("SellerID");
+
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Emilia.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Firstname");
+
+                    b.Property<string>("Lastname");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("Emilia.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<int>("Quanity");
+
+                    b.Property<int>("SellerId");
+
+                    b.Property<decimal>("TotalPrice");
+
+                    b.Property<DateTime>("orderDate");
+
+                    b.Property<int?>("productId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("SellerId");
+
+                    b.HasIndex("productId");
+
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("Emilia.Models.Product", b =>
@@ -78,15 +128,67 @@ namespace Emilia.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Category");
+                    b.Property<int>("DetailId");
+
+                    b.Property<int?>("DetailsId");
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("SellerId");
+
                     b.Property<decimal>("UnitPrice");
+
+                    b.Property<int>("category");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DetailsId");
+
+                    b.HasIndex("SellerId");
+
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("Emilia.Models.ProductDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BrandName");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Material");
+
+                    b.Property<string>("Origin");
+
+                    b.Property<string>("Specification");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductDetail");
+                });
+
+            modelBuilder.Entity("Emilia.Models.Seller", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("About");
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("ShopType");
+
+                    b.Property<string>("Tel");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Seller");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -195,6 +297,47 @@ namespace Emilia.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Emilia.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Emilia.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Emilia.Models.Seller", "seller")
+                        .WithMany()
+                        .HasForeignKey("SellerID");
+                });
+
+            modelBuilder.Entity("Emilia.Models.Order", b =>
+                {
+                    b.HasOne("Emilia.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Emilia.Models.Seller", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Emilia.Models.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productId");
+                });
+
+            modelBuilder.Entity("Emilia.Models.Product", b =>
+                {
+                    b.HasOne("Emilia.Models.ProductDetail", "Details")
+                        .WithMany()
+                        .HasForeignKey("DetailsId");
+
+                    b.HasOne("Emilia.Models.Seller", "Seller")
+                        .WithMany("Products")
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,6 +4,7 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -16,7 +17,8 @@
             "cwd": "${workspaceFolder}/Emilia",
             "stopAtEntry": false,
             "internalConsoleOptions": "neverOpen",
-            "launchBrowser": {
+            //"console": "integratedTerminal",
+           "launchBrowser": {
                 "enabled": false,
                 "args": "${auto-detect-url}",
                 "windows": {

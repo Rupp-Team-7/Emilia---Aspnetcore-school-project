@@ -11,7 +11,7 @@ namespace Emilia.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Seller> Seller {get; set;}
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -24,7 +24,7 @@ namespace Emilia.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-            builder.Entity<Product>().ToTable("Product").HasKey(p => p.Id);
+            builder.Entity<Seller>().ToTable("Seller").HasKey(s => s.Id);
         }
     }
 }

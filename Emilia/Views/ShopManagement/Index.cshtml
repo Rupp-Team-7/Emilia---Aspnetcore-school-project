@@ -1,0 +1,24 @@
+@model Emilia.Models.ShopManagementViewModels.CreateShopViewModel
+@using Emilia.Models.ShopManagementViewModels
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Create your shop.</h1>
+        <form asp-action="Create" asp-controller="ShopManagement" method="POST" class="form">
+            <div class="">
+                <label asp-for="@Model.ShopName"></label>
+                <input asp-for="@Model.ShopName" class="">
+            </div>
+            <div class="">
+                <label asp-for="@Model.ShopType" class=""></label>
+                <select asp-for="@Model.ShopType" asp-items="@Html.GetEnumSelectList<ShopType>()" class="" name="" id="">
+                    <option value="">--Choose--</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Create">
+            </div>
+        </form>
+    </div>
+</div>

@@ -11,9 +11,10 @@ using System;
 namespace Emilia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180119160930_UserEdtion")]
+    partial class UserEdtion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +54,7 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("SellerID");
+                    b.Property<int>("SellerID");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -88,9 +89,9 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("ShopType");
-
                     b.Property<string>("Tel");
+
+                    b.Property<string>("Type");
 
                     b.HasKey("Id");
 
@@ -209,7 +210,8 @@ namespace Emilia.Data.Migrations
                 {
                     b.HasOne("Emilia.Models.Seller", "seller")
                         .WithMany()
-                        .HasForeignKey("SellerID");
+                        .HasForeignKey("SellerID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -119,7 +119,7 @@ namespace Emilia.Extensions
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+               ex.Message.ToString();
             }
         }
 
@@ -142,7 +142,7 @@ namespace Emilia.Extensions
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                ex.Message.ToString();
             }
 
         }

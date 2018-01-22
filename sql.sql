@@ -4,5 +4,5 @@ FROM sys.Tables
 GO
 
 GO 
-select * from Seller;
+select * from Customer;
 GO

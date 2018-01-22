@@ -33,10 +33,12 @@ namespace Emilia.Controllers
         }
 
         //GET: /ShopManagement
+
         public async Task<IActionResult> Index()
         {
              var user = await userManager.GetUserAsync(HttpContext.User);
-             var seller =  db.Seller.FirstOrDefault(x=> x.Id == user.SellerID);
+             
+             var seller =  db.Sellers.FirstOrDefault(x=> x.Id == user.SellerID);
             
             return Ok(seller);
         }

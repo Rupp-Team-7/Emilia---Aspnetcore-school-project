@@ -16,5 +16,7 @@ namespace Emilia.Models
         public string Tel {get; set;}
         public string About { get; set; }   
         public DateTime CreatedDate {get; set;}
+
+        public ICollection<Product> Products {get; set;}
     }
 }

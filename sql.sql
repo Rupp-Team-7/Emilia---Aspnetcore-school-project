@@ -6,3 +6,7 @@ GO
 GO 
 select * from AspNetUsers;
 GO
+
+GO 
+select * from Seller;
+GO

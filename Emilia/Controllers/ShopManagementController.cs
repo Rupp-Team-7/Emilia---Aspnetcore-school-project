@@ -15,6 +15,7 @@ using Emilia.Models.ManageViewModels;
 using Emilia.Services;
 using Emilia.Models.ShopManagementViewModels;
 using Emilia.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Emilia.Controllers
 {
@@ -25,7 +26,7 @@ namespace Emilia.Controllers
         private ApplicationDbContext db;
 
 
-        public ShopManagementController( UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
+        public ShopManagementController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -34,39 +35,98 @@ namespace Emilia.Controllers
 
         //GET: /ShopManagement
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //  var user = await userManager.GetUserAsync(HttpContext.User);
-             
-            //  var seller =  db.Sellers.FirstOrDefault(x=> x.Id == user.SellerID);
-            
+            var user = await userManager.GetUserAsync(HttpContext.User);
+
+            var seller = db.Sellers.FirstOrDefault(x => x.Id == user.SellerID);
+
             // return Ok(seller);
+
+            EditShopViewModel model = new EditShopViewModel
+            {
+                Countries = SeedData.Get.Country,
+                Name = seller.Name,
+                About = seller.About,
+                Home = seller.Address,
+                City = seller.Address,
+                Street = seller.Address,
+                Tel = seller.Tel,
+                Type = (ShopType)Enum.Parse(typeof(ShopType),seller.ShopType)
+            };
+
+            return View(model);
+        }
+
+
+        //POST: /Shopmenagement
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(EditShopViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var seller = db.Sellers.FirstOrDefault(x => x.Id == user.SellerID);
+
+            if (seller.Name != model.Name)
+            {
+                seller.Name = model.Name;
+            }
+
+            if (seller.ShopType != model.Type.ToString())
+                seller.ShopType = model.Type.ToString();
+
+            //Not yet: check address home/street/ county
+            if (seller.Tel != model.Tel)
+                seller.Tel = model.Tel;
+
+            if (seller.About != model.About)
+                seller.About = model.About;
+
+            await db.SaveChangesAsync();
+
+            return Ok(seller);
+        }
+
+        //GET: /ShopManagement/CreateShop
+        public IActionResult CreateShop()
+        {
             return View();
         }
 
+        //POST: /ShopManagement/CreateShop
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(CreateShopViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-               var user = await userManager.GetUserAsync(HttpContext.User);
-               Seller seller  = new Seller {
-                   Name = model.ShopName, ShopType = model.ShopType.ToString(),About = string.Empty,
-                   Address = string.Empty,Tel = string.Empty, CreatedDate = DateTime.UtcNow
-               };
-               user.seller = seller;
+                var user = await userManager.GetUserAsync(HttpContext.User);
+                Seller seller = new Seller
+                {
+                    Name = model.ShopName,
+                    ShopType = model.ShopType.ToString(),
+                    About = string.Empty,
+                    Address = string.Empty,
+                    Tel = string.Empty,
+                    CreatedDate = DateTime.UtcNow
+                };
+                user.seller = seller;
                 var resutl = await userManager.UpdateAsync(user);
-               return Ok(user);
+                return Ok(user);
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid filed information");
                 return View();
             }
-        
+
         }
 
-        
+
     }
 }

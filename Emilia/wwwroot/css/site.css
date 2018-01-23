@@ -302,6 +302,29 @@ img._product_img {
     color: blue;
 }
 
+.strip {
+    padding: 10px 10px;
+}
+
+.strip:nth-child(odd)
+{
+    background-color: rgba(151, 145, 145, 0.2);
+}
+.strip:nth-child(even)
+{
+    background-color: rgba(218, 202, 202, 0.3);
+}
+
+#shop_logo {
+    width: 150px;
+    height: 150px;
+}
+
+#shop_cover {
+    width: 350px;
+    height: 200px;
+}
+
 
 /* rith */
 
@@ -378,3 +401,6 @@ img._product_img {
     bottom: 5px;
     right: 10px;
 }
+
+
+

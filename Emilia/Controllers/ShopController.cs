@@ -12,13 +12,29 @@ namespace Emilia.Controllers
 {
     public class ShopController : Controller
     {
-
+        private ApplicationDbContext db;
        
+        public ShopController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         //Get: /, /shop/
         public IActionResult Index()
         {
             return View();
         }
+
+        
+        public IActionResult Profile(int id)
+        {
+            var model = db.Sellers.SingleOrDefault(s => s.Id == id);
+
+            // return (model);
+
+            return View(model);
+        }
+
         public IActionResult About()
         {
             return View();

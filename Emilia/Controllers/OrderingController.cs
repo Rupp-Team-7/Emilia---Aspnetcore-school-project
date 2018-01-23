@@ -16,7 +16,7 @@ namespace Emilia.Controllers
         {
             return View();
         }
-        public IActionResult Deliveried()
+        public IActionResult History()
         {
             return View();
         }

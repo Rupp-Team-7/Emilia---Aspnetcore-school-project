@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="row">
+    @for (var i = 1; i <= 9; i++)
+    {
+        <div class="col-sm-3">
+            <div class="wall">
+                <div class="wall-head">
+                    <h3>{Prodcut Name}</h3>
+                </div>
+                <div class="wall-body">
+                    <img class="img-fluid" src="~/images/533007 (1).png" />
+                </div>
+                <div class="wall-footer">
+                    <h3>Customer: <small>{$CusName}</small></h3>
+                    <h3>Contect: <small>{$CusPhone}</small></h3>
+                    <h3>Date: <small>{$Date}</small></h3><br />
+                    <button type="button" class="btn btn-dark" disabled>Deliveried</button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="col-sm-3">
+        @await Html.PartialAsync("~/Views/Home/_SearchPatial")
+    </div>
+</div>
+

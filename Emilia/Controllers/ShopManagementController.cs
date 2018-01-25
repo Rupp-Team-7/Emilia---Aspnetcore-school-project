@@ -139,6 +139,7 @@ namespace Emilia.Controllers
 
         }
 
+        //POST: /ShopManegement/ChangeLogo
         [HttpPost]
         public async Task<IActionResult> ChangeLogo(UploadPhotoViewModel model)
         {
@@ -148,6 +149,21 @@ namespace Emilia.Controllers
             model = await SavePhoto(model);
 
             return Ok(model);
+        }
+
+        //POST: /ShopManegement/ChangeBackground
+        [HttpPost]
+        public async Task<IActionResult> ChangeBackground(UploadPhotoViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            model = await SavePhoto(model);
+
+            return Ok(model);
+
         }
 
         private async Task<UploadPhotoViewModel> SavePhoto(UploadPhotoViewModel model)

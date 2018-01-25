@@ -352,6 +352,33 @@ img._product_img {
     color: green;
 }
 
+.relate {
+    position: relative;
+}
+
+.fa-spin {
+    display: inline-block !important;
+}
+
+#logo_uploader.fade {
+    -webkit-transition: opacity 1.5ms linear;
+       -moz-transition: opacity 1.5ms linear;
+        -ms-transition: opacity 1.5ms linear;
+         -o-transition: opacity 1.5ms linear;
+            transition: opacity 1.5ms linear;
+  }
+
+#ChangeBackground_Spin, #ChangeLogo_Spin {
+    display: none;
+    width: 50px;
+    height: 50px;
+    color: rebeccapurple;
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    margin: auto;
+}
+
 /* rith */
 
 .carousel{

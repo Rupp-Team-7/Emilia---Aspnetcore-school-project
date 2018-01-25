@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Emilia.Data;
 using Emilia.Models;
 using Emilia.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Emilia
 {
@@ -37,6 +38,18 @@ namespace Emilia
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+
+            // var skipSSL = Configuration.GetValue<bool>("LocalTest:skipSSL");
+            // // requires using Microsoft.AspNetCore.Mvc;
+            // services.Configure<MvcOptions>(options =>
+            // {
+            //     // Set LocalTest:skipSSL to true to skip SSL requrement in 
+            //     // debug mode. This is useful when not using Visual Studio.
+            //     if (env.IsDevelopment() && !skipSSL)
+            //     {
+            //         options.Filters.Add(new RequireHttpsAttribute());
+            //     }
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

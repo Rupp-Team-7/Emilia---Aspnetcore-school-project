@@ -13,7 +13,7 @@
 <ul class="list-unstyled">
     @Html.Partial("_Message", Model.Message)
     <li class="strip">
-        <h4>Logo</h4>
+        <h5>Logo</h5>
         <div class="row">
             <div class="col-sm-4 ">
                 <img class="center-block relate" id="shop_logo" src="~/@Model.LogoPath" alt="">
@@ -28,7 +28,7 @@
         </div>
     </li>
     <li class="strip">
-        <h4>Background</h4>
+        <h5>Background</h5>
         <div class="row">
             <div class="col-sm-4 ">
                 <img class="center-block relate" id="shop_cover" src="~/@Model.BackgroundPath" alt="">
@@ -43,6 +43,7 @@
         </div>
     </li>
     <li class="strip ">
+        <h5>Information</h5>
       <form method="POST" >
           <input asp-for="LogoPath" hidden/>
           <input asp-for="BackgroundPath" hidden/>
@@ -89,8 +90,10 @@
                      <textarea class="form-control form-control-sm" asp-for="About" cols="32" rows="5"></textarea>
                 </div>
             </div>
-            <div class="form-group">
-                <input  class=" btn btn-primary " type="submit" value="Save change">
+            <div class="form-group row">
+                <a asp-controller="ShopManagement" asp-action="index" class="col-sm-2 btn btn-default">Cancel</a>
+                <input  class=" btn btn-primary col-sm-2" type="submit" value="Save change">
+                <a class="btn btn-link col-sm-2 " asp-controller="Shop" asp-action="Profile">Return to shop</a>
             </div>
       </form>  
     </li>

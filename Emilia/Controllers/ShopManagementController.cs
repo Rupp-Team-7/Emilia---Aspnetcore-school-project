@@ -16,6 +16,8 @@ using Emilia.Services;
 using Emilia.Models.ShopManagementViewModels;
 using Emilia.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Emilia.Controllers
 {
@@ -24,13 +26,18 @@ namespace Emilia.Controllers
         private UserManager<ApplicationUser> userManager;
         private SignInManager<ApplicationUser> signInManager;
         private ApplicationDbContext db;
+        private IHostingEnvironment environment;
+
+        [TempData]
+        public string Message { get; set; }
 
 
-        public ShopManagementController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
+        public ShopManagementController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext db, IHostingEnvironment env)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.db = db;
+            this.environment = env;
         }
 
         //GET: /ShopManagement
@@ -52,7 +59,8 @@ namespace Emilia.Controllers
                 City = seller.Address,
                 Street = seller.Address,
                 Tel = seller.Tel,
-                Type = (ShopType)Enum.Parse(typeof(ShopType),seller.ShopType)
+                Type = (ShopType)Enum.Parse(typeof(ShopType), seller.ShopType),
+                Message = this.Message
             };
 
             return View(model);
@@ -87,9 +95,13 @@ namespace Emilia.Controllers
             if (seller.About != model.About)
                 seller.About = model.About;
 
-            await db.SaveChangesAsync();
+            // if(seller.LogoImg != model.LogoPath)
+            //     seller.LogoImg == model.LogoPath;
 
-            return Ok(seller);
+            await db.SaveChangesAsync();
+            Message = "Your information has been updated.";
+
+            return RedirectToAction(nameof(Index));
         }
 
         //GET: /ShopManagement/CreateShop
@@ -98,7 +110,7 @@ namespace Emilia.Controllers
             return View();
         }
 
-        //POST: /ShopManagement/CreateShop
+        //POST: /ShopManagement/Create
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(CreateShopViewModel model)
@@ -127,6 +139,32 @@ namespace Emilia.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangeLogo(UploadPhotoViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+                
+            model = await SavePhoto(model);
 
+            return Ok(model);
+        }
+
+        private async Task<UploadPhotoViewModel> SavePhoto(UploadPhotoViewModel model)
+        {     
+            var file = model.Files;
+            if (model.Files.Length > 0)
+            {
+                var path = Path.Combine(environment.WebRootPath, "images");
+
+                using (var fs = new FileStream(Path.Combine(path, file.FileName), FileMode.Create))
+                {
+                    await file.CopyToAsync(fs);
+                }
+                model.Source = $"images/{file.FileName}";
+                
+            }
+            return model;
+        }
     }
 }

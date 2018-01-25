@@ -294,11 +294,25 @@ img._product_img {
     float: left;
 }
 #product_panel a {
-    color: gray;
+    color: rgb(175, 166, 166);
+    font-size: 1.5rem;
+    line-height: 2;
+    margin: 0 0.2rem;
+    display: none;
 }
 #product_panel a:hover{
     text-decoration: none;
-    color: blue;
+    color: rgba(9, 223, 45, 0.616);
+    
+}
+
+li.product_item:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    transition: all 0.5s ease;
+}
+
+li.product_item:hover a {
+    display: inline-block !important;
 }
 
 .custom-file-control::before {

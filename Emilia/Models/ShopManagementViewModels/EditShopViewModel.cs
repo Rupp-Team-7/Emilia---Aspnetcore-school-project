@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Emilia.Models;
 using Emilia.Models.ShopManagementViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 
 namespace Emilia.Models.ShopManagementViewModels
 {
@@ -18,8 +19,11 @@ namespace Emilia.Models.ShopManagementViewModels
         public string City {get; set;}
         public string Tel {get; set;}
         public string About {get; set;}
-        
+        public string LogoPath {get; set;}
+        public string BackgroundPath {get; set;}
+    
         public IEnumerable<SelectListItem> Countries {get;set;}
+        public String Message {get;set;}
 
     }
 

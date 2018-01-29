@@ -9,7 +9,6 @@
     padding-top:15px;
     padding-left: 15px;
     padding-right: 15px;
-
 }
 
 /* Carousel */
@@ -295,25 +294,50 @@ img._product_img {
     float: left;
 }
 #product_panel a {
-    color: gray;
+    color: rgb(175, 166, 166);
+    font-size: 1.5rem;
+    line-height: 2;
+    margin: 0 0.2rem;
+    display: none;
 }
 #product_panel a:hover{
     text-decoration: none;
-    color: blue;
+    color: rgba(9, 223, 45, 0.616);
+    
 }
+
+li.product_item:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    transition: all 0.5s ease;
+}
+
+li.product_item:hover a {
+    display: inline-block !important;
+}
+
+.custom-file-control::before {
+    content: "Browse";
+}
+
+.custom-file-control::after {
+    content: "Choose file";
+}
+
 
 .strip {
     padding: 10px 10px;
+    /* background-color: rgba(47, 79, 79, 0.2); */
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
 }
 
-.strip:nth-child(odd)
+/* .strip:nth-child(odd)
 {
     background-color: rgba(151, 145, 145, 0.2);
 }
 .strip:nth-child(even)
 {
     background-color: rgba(218, 202, 202, 0.3);
-}
+} */
 
 #shop_logo {
     width: 150px;
@@ -325,6 +349,48 @@ img._product_img {
     height: 200px;
 }
 
+.alert {
+    border-radius: 0;
+}
+.alert-fantasy {
+    background-color: rgba(47, 79, 79, 0.2);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.text-frown-o {
+    color: red;
+}
+.text-smile-o {
+    color: green;
+}
+
+.relate {
+    position: relative;
+}
+
+.fa-spin {
+    display: inline-block !important;
+}
+
+#logo_uploader.fade {
+    -webkit-transition: opacity 1ms linear;
+       -moz-transition: opacity 1ms linear;
+        -ms-transition: opacity 1ms linear;
+         -o-transition: opacity 1ms linear;
+            transition: opacity 1ms linear;
+  }
+
+#ChangeBackground_Spin, #ChangeLogo_Spin {
+    display: none;
+    width: 50px;
+    height: 50px;
+    color: rgb(36, 206, 87);
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    margin: auto;
+}
 
 /* rith */
 

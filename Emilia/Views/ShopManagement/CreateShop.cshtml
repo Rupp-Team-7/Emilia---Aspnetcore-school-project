@@ -4,21 +4,25 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h1>Create your shop.</h1>
-        <form asp-action="Create" asp-controller="ShopManagement" method="POST" class="form">
-            <div class="">
-                <label asp-for="@Model.ShopName"></label>
-                <input asp-for="@Model.ShopName" class="">
+        <h4>Create your shop.</h4>
+        <form asp-action="Create" asp-controller="ShopManagement" method="POST" class="form mt-4 mb-4">
+            <div class="form-group">
+                <input class="form-control form-control-lg" placeholder="Your shop name" asp-for="@Model.ShopName">
             </div>
-            <div class="">
-                <label asp-for="@Model.ShopType" class=""></label>
-                <select asp-for="@Model.ShopType" asp-items="@Html.GetEnumSelectList<ShopType>()" class="" name="" id="">
-                    <option value="">--Choose--</option>
-                </select>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" asp-for="@Model.ShopType" ></label>
+                <div class="col-sm-6">
+                    <select class="form-control" asp-for="@Model.ShopType" asp-items="@Html.GetEnumSelectList<ShopType>()">
+                        <option value="">--Choose--</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <input type="submit" value="Create">
+            <div class="form-group row mx-auto">
+                <input class="col-sm-12 btn btn-primary" type="submit" value="Create">
             </div>
         </form>
+    </div>
+    <div class="col-sm-6">
+        <img src="~/images/002.jpg" class="d-block mx-auto" height="400">
     </div>
 </div>

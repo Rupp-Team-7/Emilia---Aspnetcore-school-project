@@ -46,7 +46,7 @@ namespace Emilia.Controllers
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
 
-            var seller = db.Sellers.FirstOrDefault(x => x.Id == user.SellerID);
+            var seller = db.Sellers.SingleOrDefault(x => x.Id == user.SellerID);
 
             // return Ok(seller);
 
@@ -127,7 +127,7 @@ namespace Emilia.Controllers
                     Tel = string.Empty,
                     CreatedDate = DateTime.UtcNow
                 };
-                user.seller = seller;
+                user.SellerID = seller.Id;
                 var resutl = await userManager.UpdateAsync(user);
                 return Ok(user);
             }

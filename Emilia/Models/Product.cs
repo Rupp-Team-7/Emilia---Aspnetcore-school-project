@@ -23,8 +23,8 @@ namespace Emilia.Models
         public int SellerId {get; set;}
         public int DetailId {get; set;}
 
-        public virtual ProductDetail Details {get; set;}
-        public virtual Seller Seller {get; set;}
+        public ProductDetail Details {get; set;}
+        public Seller Seller {get; set;}
 
        // public ICollection<string> Tags {get; set;}
     }

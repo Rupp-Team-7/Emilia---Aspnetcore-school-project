@@ -222,7 +222,7 @@ namespace Emilia.Controllers
             {
                 Customer c = new Customer { Firstname = model.FirstName, Lastname = model.LastName};
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                    Customer = c, Name = c.Firstname
+                    CustomerID= c.Id, Name = c.Firstname
                  };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

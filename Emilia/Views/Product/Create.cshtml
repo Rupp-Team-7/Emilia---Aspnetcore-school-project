@@ -4,10 +4,11 @@
 @await Html.PartialAsync("productNav")
 
 <h3>Add new item</h3>
-<form asp-controller="Product" asp-action="Create" method="POST" class="form light_border" id="form_create_product" enctype="multipart/form-data">
 
-    <div class=" row">
+
+    <div class=" row light_border">
         <div class="col-sm-6 ">
+            <form asp-controller="Product" asp-action="Create" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
                 <div class="form-group row">
                         <label asp-for="ProductCode" class="col-form-label col-sm-3"></label>
                         <div class="col-sm-8">
@@ -61,25 +62,26 @@
                     <textarea class="form-control form-control-sm" asp-for="Specification" cols="30" rows="5"></textarea>
                 </div>
             </div>
-
-            
-        </div>
-
-        <div class="col-sm-4" id="imgage_uploader">
-            <div class="uploader">
-                <input class="uploader_input" asp-for="Files" >
-                <label class="uploader_label" asp-for="Files">Add Photo</label>
-            </div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
             <div class="form-group">
                 <button class="btn btn-primary btn-md " type="submit">Publish</button>
                 <button class="btn btn-danger btn-md" type="reset">Clear</button>
             </div>
+            </form>
+        </div>
+
+        <div class="col-sm-4" id="imgage_uploader">
+            <form asp-controller="Upload" asp-action="Photos" method="POST"  enctype="multipart/form-data">
+                <div class="uploader">
+                <input class="uploader_input" type="file" id="files" name="files" multiple>
+                <label class="uploader_label" >Add Photo</label>
+            </div>
+            <div class="inline_box"></div>
+            <div class="inline_box"></div>
+            <div class="inline_box"></div>
+            <div class="inline_box"></div>
+            <button type="submit">Upload</button>
+            </form>
         </div>
     </div>
 
 
-</form>

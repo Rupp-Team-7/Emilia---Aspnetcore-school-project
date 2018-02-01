@@ -50,6 +50,11 @@ namespace Emilia.Controllers
 
             // return Ok(seller);
 
+            if(seller == null)
+            {
+                return RedirectToAction(nameof(CreateShop));
+            }
+
             EditShopViewModel model = new EditShopViewModel
             {
                 Countries = SeedData.Get.Country,
@@ -125,11 +130,16 @@ namespace Emilia.Controllers
                     About = string.Empty,
                     Address = string.Empty,
                     Tel = string.Empty,
-                    CreatedDate = DateTime.UtcNow
+                    CreatedDate = DateTime.UtcNow,
                 };
+
+                db.Add(seller);
+                var effect = await db.SaveChangesAsync();
+                seller = db.Sellers.SingleOrDefault(s => s == seller);
                 user.SellerID = seller.Id;
-                var resutl = await userManager.UpdateAsync(user);
-                return Ok(user);
+                await userManager.UpdateAsync(user);
+
+                return RedirectToAction(nameof(Index));
             }
             else
             {

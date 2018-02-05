@@ -21,6 +21,8 @@ namespace Emilia.Controllers
             this.environment = environment;
         }
 
+
+        //AJAX-POST: /Upload/Photos
         [HttpPost]
         public async Task<IActionResult> Photos(List<IFormFile> files)
         {
@@ -39,7 +41,7 @@ namespace Emilia.Controllers
                         await file.CopyToAsync(fs);
                     }
 
-                    builder.Append(Path.Combine(path, file.FileName)).Append(";");
+                    builder.Append($"images/{file.FileName}").Append(";");
                     count++;
                 }
             }

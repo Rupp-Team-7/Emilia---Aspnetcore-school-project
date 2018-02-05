@@ -42,7 +42,8 @@ namespace Emilia.Models.ProductViewModel
         [MaxLength(150)]
         public string Specification { get; set; }
 
-        public IFormFile Files { get; set; }
+        [HiddenInput]
+        public string PhotoPath {get; set;}
 
     }
 

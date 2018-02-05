@@ -1,6 +1,4 @@
 ﻿
-
-
 // Write your JavaScript code.
 $(document).ready(function () {
 
@@ -57,6 +55,54 @@ $(document).ready(function () {
 
         function DoBeforeSend() {
             $("#" + route + "_Spin").addClass("fa-spin");
+        }
+
+    });
+
+    $("#form_product_photo_uploader").submit(function (e) {
+       e.preventDefault();
+        
+        var form = $(this)[0];
+        var data = new FormData(form);
+
+        $.ajax({
+            method: "POST",
+            url: "/Upload/Photos",
+            data: data,
+            processData: false,
+            contentType: false,
+            beforeSend: DoBeforeSend
+        })
+        .done(function (model, code) { 
+            if(code === "success")
+            {
+                alert("success" + model);
+                $("#PhotoPath").val(model.photoPath);
+
+                var path = (model.photoPath + "").split(";");
+                console.log(path);
+                $("#photo_container").empty();
+                for(var i = 0; i < path.length-1; i++)
+                {
+                    
+                    $("#photo_container").prepend(
+                        $("<div></div>").addClass("")
+                            .append($("<img>").addClass("img").attr("src", "/" + path[i]))
+                    );
+                }
+                
+            }
+          
+
+        })
+        .fail(function () { 
+            alert("Unable to upload phtoto"); 
+        });
+
+    
+        function DoBeforeSend()
+        {
+
         }
 
     });

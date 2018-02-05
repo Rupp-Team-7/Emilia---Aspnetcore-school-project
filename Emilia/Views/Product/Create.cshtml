@@ -10,6 +10,7 @@
         <div class="col-sm-6 ">
             <form asp-controller="Product" asp-action="Create" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
                 <div class="form-group row">
+                    <input asp-for="PhotoPath">
                         <label asp-for="ProductCode" class="col-form-label col-sm-3"></label>
                         <div class="col-sm-8">
                             <input  class="form-control form-control-sm" asp-for="ProductCode" placeholder="code: P001E3">
@@ -70,15 +71,18 @@
         </div>
 
         <div class="col-sm-4" id="imgage_uploader">
-            <form asp-controller="Upload" asp-action="Photos" method="POST"  enctype="multipart/form-data">
+            <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
                 <div class="uploader">
-                <input class="uploader_input" type="file" id="files" name="files" multiple>
+                <input class="uploader_input" type="file" id="Files" name="Files" multiple>
                 <label class="uploader_label" >Add Photo</label>
             </div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
-            <div class="inline_box"></div>
+            <div id="photo_container">
+                <div class="inline_box"></div>
+                <div class="inline_box"></div>
+                <div class="inline_box"></div>
+                <div class="inline_box"></div>
+            </div>
+            
             <button type="submit">Upload</button>
             </form>
         </div>

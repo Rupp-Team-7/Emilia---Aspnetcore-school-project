@@ -14,7 +14,9 @@ namespace Emilia.Models
         public string ShopType {get; set;}
         public string Address { get; set; } 
         public string Tel {get; set;}
-        public string About { get; set; }   
+        public string About { get; set; }
+        public string Cover {get; set;}
+        public string Logo {get; set;}   
         public DateTime CreatedDate {get; set;}
 
         public ICollection<Product> Products {get; set;}

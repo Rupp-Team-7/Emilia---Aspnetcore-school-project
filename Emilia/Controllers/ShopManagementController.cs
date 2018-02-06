@@ -47,11 +47,11 @@ namespace Emilia.Controllers
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
 
-            var seller = await  db.Sellers.FirstOrDefaultAsync(x => x.Id == user.SellerID);
+            var seller = await db.Sellers.FirstOrDefaultAsync(x => x.Id == user.SellerID);
 
             // return Ok(seller);
 
-            if(seller == null)
+            if (seller == null)
             {
                 return RedirectToAction(nameof(CreateShop));
             }
@@ -66,7 +66,9 @@ namespace Emilia.Controllers
                 Street = seller.Address,
                 Tel = seller.Tel,
                 Type = (ShopType)Enum.Parse(typeof(ShopType), seller.ShopType),
-                Message = this.Message
+                Message = this.Message,
+                LogoPath = seller.Logo,
+                BackgroundPath = seller.Cover
             };
 
             return View(model);
@@ -85,6 +87,16 @@ namespace Emilia.Controllers
 
             var user = await userManager.GetUserAsync(HttpContext.User);
             var seller = db.Sellers.FirstOrDefault(x => x.Id == user.SellerID);
+
+            if (seller.Logo != model.LogoPath)
+            {
+                seller.Logo = model.LogoPath;
+            }
+
+            if (seller.Cover != model.BackgroundPath)
+            {
+                seller.Cover = model.BackgroundPath;
+            }
 
             if (seller.Name != model.Name)
             {
@@ -156,7 +168,7 @@ namespace Emilia.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-                
+
             model = await SavePhoto(model);
 
             return Ok(model);
@@ -166,7 +178,7 @@ namespace Emilia.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangeBackground(UploadPhotoViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -178,7 +190,7 @@ namespace Emilia.Controllers
         }
 
         private async Task<UploadPhotoViewModel> SavePhoto(UploadPhotoViewModel model)
-        {     
+        {
             var file = model.Files;
             if (model.Files.Length > 0)
             {
@@ -189,7 +201,7 @@ namespace Emilia.Controllers
                     await file.CopyToAsync(fs);
                 }
                 model.Source = $"images/{file.FileName}";
-                
+
             }
             return model;
         }

@@ -14,8 +14,8 @@ namespace  Emilia.Models
         public int CustomerId {get; set;}
         public int  SellerId {get; set;}
 
-        public virtual Customer Customer {get; set;}
-        public virtual Seller Seller {get; set;}
+        public Customer Customer {get; set;}
+        public Seller Seller {get; set;}
 
         // public int DeliveryId { get; set; }
         // public Delivery Delivery { get; set; }

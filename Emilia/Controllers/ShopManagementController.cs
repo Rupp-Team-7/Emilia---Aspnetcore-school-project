@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -46,9 +47,14 @@ namespace Emilia.Controllers
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
 
-            var seller = db.Sellers.FirstOrDefault(x => x.Id == user.SellerID);
+            var seller = await  db.Sellers.FirstOrDefaultAsync(x => x.Id == user.SellerID);
 
             // return Ok(seller);
+
+            if(seller == null)
+            {
+                return RedirectToAction(nameof(CreateShop));
+            }
 
             EditShopViewModel model = new EditShopViewModel
             {
@@ -125,11 +131,16 @@ namespace Emilia.Controllers
                     About = string.Empty,
                     Address = string.Empty,
                     Tel = string.Empty,
-                    CreatedDate = DateTime.UtcNow
+                    CreatedDate = DateTime.UtcNow,
                 };
-                user.seller = seller;
-                var resutl = await userManager.UpdateAsync(user);
-                return Ok(user);
+
+                db.Add(seller);
+                var effect = await db.SaveChangesAsync();
+                seller = db.Sellers.SingleOrDefault(s => s == seller);
+                user.SellerID = seller.Id;
+                await userManager.UpdateAsync(user);
+
+                return RedirectToAction(nameof(Index));
             }
             else
             {

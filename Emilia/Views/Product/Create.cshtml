@@ -37,6 +37,7 @@
                 <div class="col-sm-5">
                     <input asp-for="UnitPrice"  class="form-control form-control-sm" placeholder="$">
                 </div>
+                <label class="text-info h5" id="photo-label">Photo: 0</label>
             </div>
             <div class="form-group row">
                 <label asp-for="BrandName" class="col-form-label col-sm-3"></label>
@@ -74,7 +75,7 @@
             <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
                 <div class="uploader">
                 <input class="uploader_input" type="file" id="Files" name="Files" multiple>
-                <label class="uploader_label" >Add Photo</label>
+                <label class="uploader_label" >Attach photos</label>
             </div>
             <div id="photo_container">
                 <div class="inline_box"></div>
@@ -83,7 +84,7 @@
                 <div class="inline_box"></div>
             </div>
             
-            <button type="submit">Upload</button>
+            <button style="width:100%" class="btn btn-primary" type="submit">Add</button>
             </form>
         </div>
     </div>

@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -46,7 +47,7 @@ namespace Emilia.Controllers
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
 
-            var seller = db.Sellers.SingleOrDefault(x => x.Id == user.SellerID);
+            var seller = await  db.Sellers.FirstOrDefaultAsync(x => x.Id == user.SellerID);
 
             // return Ok(seller);
 

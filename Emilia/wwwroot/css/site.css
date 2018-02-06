@@ -232,6 +232,12 @@ color: white;
     margin: 0 0;
 }
 
+img.inline_box {
+    width: 24%;
+    height: 28%;
+}
+
+
 #imgage_uploader .inline_box {
     width: 24%;
     height: 28%;

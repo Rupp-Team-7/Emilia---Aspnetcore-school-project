@@ -84,13 +84,12 @@ $(document).ready(function () {
                 $("#photo_container").empty();
                 for(var i = 0; i < path.length-1; i++)
                 {
-                    
                     $("#photo_container").prepend(
-                        $("<div></div>").addClass("")
-                            .append($("<img>").addClass("img").attr("src", "/" + path[i]))
+                       $("<img>").addClass("inline_box").attr("src", "/" + path[i])
                     );
                 }
                 
+                $("#photo-label").text("Photo:" + (path.length - 1));
             }
           
 

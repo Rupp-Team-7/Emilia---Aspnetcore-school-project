@@ -1,24 +1,132 @@
-@model Emilia.Models.ShopManagementViewModels.CreateShopViewModel
-@using Emilia.Models.ShopManagementViewModels
+@model Emilia.Models.ShopManagementViewModels.EditShopViewModel 
+@using Emilia.Models.ShopManagementViewModels 
+
+@{ 
+    Layout = "~/Views/Shared/_Dashboard.cshtml"; 
+}
 
 
-<div class="row">
-    <div class="col-sm-6">
-        <h1>Create your shop.</h1>
-        <form asp-action="Create" asp-controller="ShopManagement" method="POST" class="form">
-            <div class="">
-                <label asp-for="@Model.ShopName"></label>
-                <input asp-for="@Model.ShopName" class="">
+
+<h2>Change shop information</h2>
+<hr>
+
+<ul class="list-unstyled">
+    @Html.Partial("_Message", Model.Message)
+    <li class="strip">
+        <h5>Logo</h5>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <img class="center-block relate" id="shop_logo" src="~/@Model.LogoPath" alt="">
+                <span id="ChangeLogo_Spin" class="fa fa-circle-o-notch fa-3x fa-fw"></span>
             </div>
-            <div class="">
-                <label asp-for="@Model.ShopType" class=""></label>
-                <select asp-for="@Model.ShopType" asp-items="@Html.GetEnumSelectList<ShopType>()" class="" name="" id="">
-                    <option value="">--Choose--</option>
+            <div class="col-sm-4">
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam doloremque, temporibus assumenda obcaecati omnis non illum. Cupiditate dolor quae fuga.</p>
+            </div>
+            <div class="col-sm-2 ">
+                <button class="btn btn-primary" data-change="ChangeLogo" data-toggle="modal" data-target="#logo_uploader">Change logo</button>
+            </div>
+        </div>
+    </li>
+    <li class="strip">
+        <h5>Background</h5>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <img class="center-block relate" id="shop_cover" src="~/@Model.BackgroundPath" alt="">
+                <span id="ChangeBackground_Spin" class="fa fa-circle-o-notch  fa-3x fa-fw"></span>
+            </div>
+            <div class="col-sm-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, suscipit delectus consectetur in sit corrupti mollitia beatae aspernatur dolores pariatur!
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary" data-change="ChangeBackground" data-toggle="modal" data-target="#logo_uploader">Change background</button>
+            </div>
+        </div>
+    </li>
+    <li class="strip ">
+        <h5>Information</h5>
+      <form method="POST" >
+          <input asp-for="LogoPath" hidden/>
+          <input asp-for="BackgroundPath" hidden/>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">Shop name:</label>
+                <div class="col-sm-4">
+                    <input class="form-control form-control-sm" asp-for="Name" class="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">Category:</label>
+                <div class="col-sm-4">
+                    <select class="custom-select custom-select-sm" asp-for="Type" asp-items="@Html.GetEnumSelectList<ShopType>()">
                 </select>
+                </div>
+                
             </div>
-            <div>
-                <input type="submit" value="Create">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="">Address:</label>
+                <div class="col-sm-1">
+                    <input class="form-control form-control-sm" asp-for="Home" placeholder="home">
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control form-control-sm" asp-for="Street" type="text" placeholder="street">
+                </div>
+                <div class="col-sm-2">
+                    <select class="custom-select custom-select-sm" asp-for="City" asp-items="@Model.Countries">
+                        <option>State/Province</option>
+                    </select>
+                </div>
+                
             </div>
-        </form>
-    </div>
-</div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" >Telephone:</label>
+                <div class="col-sm-4">
+                    <input class="form-control form-control-sm" asp-for="Tel">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="">About:</label><br>
+                <div class="col-sm-4">
+                     <textarea class="form-control form-control-sm" asp-for="About" cols="32" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <a asp-controller="ShopManagement" asp-action="index" class="col-sm-2 btn btn-default">Cancel</a>
+                <input  class=" btn btn-primary col-sm-2" type="submit" value="Save change">
+                <a class="btn btn-link col-sm-2 " asp-controller="Shop" asp-action="Profile">Return to shop</a>
+            </div>
+      </form>  
+    </li>
+</ul>
+ <!-- Modal -->
+ <div class="modal fade" id="logo_uploader" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Upload logo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+    
+            <form id="form-post-logo" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <img id="logo_img" alt="">
+                    <label class="custom-file w-100">
+                        <input name="Files" type="file" class="custom-file-input" id="Files" aria-describedby="fileHelp">
+                        <span class="custom-file-control form-control-file"></span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id="btn_post_logo" type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+    
+          </div>
+        </div>
+      </div>
+    
+
+ 
+

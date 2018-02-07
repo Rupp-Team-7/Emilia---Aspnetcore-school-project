@@ -60,8 +60,8 @@ $(document).ready(function () {
     });
 
     $("#form_product_photo_uploader").submit(function (e) {
-       e.preventDefault();
-        
+        e.preventDefault();
+
         var form = $(this)[0];
         var data = new FormData(form);
 
@@ -73,37 +73,39 @@ $(document).ready(function () {
             contentType: false,
             beforeSend: DoBeforeSend
         })
-        .done(function (model, code) { 
-            if(code === "success")
-            {
-                alert("success" + model);
-                $("#PhotoPath").val(model.photoPath);
-
+        .done(function (model, code) {
+            if (code === "success") {
                 var path = (model.photoPath + "").split(";");
-                console.log(path);
                 $("#photo_container").empty();
-                for(var i = 0; i < path.length-1; i++)
-                {
+                for (var i = 0; i < path.length - 1; i++) {
                     $("#photo_container").prepend(
-                       $("<img>").addClass("inline_box").attr("src", "/" + path[i])
+                        $("<img>").addClass("inline_box").attr("src", "/" + path[i])
                     );
                 }
-                
                 $("#photo-label").text("Photo:" + (path.length - 1));
+                $("#PhotoPath").val(model.photoPath);
             }
-          
-
         })
-        .fail(function () { 
-            alert("Unable to upload phtoto"); 
+        .fail(function () {
+            alert("Unable to upload phtoto");
         });
 
-    
-        function DoBeforeSend()
-        {
 
+        function DoBeforeSend() {
+            $("#photo_container").empty();
+            $("#photo_container").append($("<span></span>").addClass("fa fa-circle-o-notch fa-3x fa-fw fa-spin text-info"))
         }
 
+    });
+
+    $("#btn-product-create-clear").click(function () {
+        $("#photo_container").empty();
+        $("#photo-label").text("Photo: 0");
+        for (var i = 0; i < 4; i++) {
+            $("#photo_container").prepend(
+                $("<div></div>").addClass("inline_box")
+            );
+        }
     });
 });
 

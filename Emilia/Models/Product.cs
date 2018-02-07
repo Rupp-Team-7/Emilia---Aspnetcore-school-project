@@ -19,7 +19,7 @@ namespace Emilia.Models
         public decimal UnitPrice { get; set; }
         public Category category { get; set; }
         public DateTime Created { get; set; }
-
+        public string ImgPath {get; set;}
         public int SellerId { get; set; }
         public int DetailId { get; set; }
 

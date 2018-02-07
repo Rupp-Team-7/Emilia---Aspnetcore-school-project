@@ -26,9 +26,11 @@ namespace Emilia.Controllers
         }
 
         // GET: /Product/index
-        public IActionResult Index(string term)
+        public async Task<IActionResult> Index(string term)
         {
-            return View(db.Products.ToList());
+            var model = new ProductIndexViewModel(await db.Products.ToListAsync());
+
+            return View(model);
         }
 
         // GET: /Product/Create
@@ -65,7 +67,8 @@ namespace Emilia.Controllers
                     Specification = model.Specification,
                     Origin = string.IsNullOrEmpty(model.Origin) ? "N/A" : model.Origin,
                     Material = model.ProductCode
-                }
+                },
+                ImgPath = model.PhotoPath
             };
 
             await this.db.Products.AddAsync(product);

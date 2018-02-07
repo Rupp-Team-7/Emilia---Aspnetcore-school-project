@@ -4,8 +4,6 @@
 @await Html.PartialAsync("productNav")
 
 <h3>Add new item</h3>
-
-
     <div class=" row light_border">
         <div class="col-sm-6 ">
             <form asp-controller="Product" asp-action="Create" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
@@ -66,7 +64,7 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-md " type="submit">Publish</button>
-                <button class="btn btn-danger btn-md" type="reset">Clear</button>
+                <button id="btn-product-create-clear" class="btn btn-danger btn-md" type="reset">Clear</button>
             </div>
             </form>
         </div>
@@ -83,7 +81,6 @@
                 <div class="inline_box"></div>
                 <div class="inline_box"></div>
             </div>
-            
             <button style="width:100%" class="btn btn-primary" type="submit">Add</button>
             </form>
         </div>

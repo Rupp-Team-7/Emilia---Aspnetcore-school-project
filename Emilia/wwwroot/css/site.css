@@ -397,6 +397,17 @@ li.product_item:hover a {
     left: 15%;
     margin: auto;
 }
+#ProductDetail .card {
+    border-radius: 0;
+}
+.card-img-group {
+    width: 100%;
+}
+.card-img-member {
+    display: inline-block;
+    width: 20%;
+    height: auto;
+}
 
 /* rith */
 

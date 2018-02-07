@@ -89,5 +89,36 @@ namespace Emilia.Controllers
         {
             return View();
         }
+
+        // [HttpPost]
+        // public IActionResult Edit()
+        // {
+
+        // }
+
+        //Get: /Product/Detail/1
+        public async Task<IActionResult> Detail(int? id)
+        {
+           if(!id.HasValue)
+                return BadRequest();
+
+            var sellerId = await GetSellerID();
+            var product = await db.Products
+                .Include(p => p.Details)
+                .Where(p => p.SellerId == sellerId)
+                .SingleOrDefaultAsync(p => p.Id == id);
+
+                return View(product);
+        }
+
+       private async Task<int> GetSellerID()
+       {
+            var user = await manager.GetUserAsync(HttpContext.User);
+            var seller = await db.Sellers.Where(s => s.Id == user.SellerID).AsNoTracking().SingleOrDefaultAsync();
+
+            if(seller == null)
+                return -1;
+            return seller.Id;
+       }
     }
 }

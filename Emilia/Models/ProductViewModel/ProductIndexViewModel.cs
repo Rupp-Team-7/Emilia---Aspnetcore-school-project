@@ -21,7 +21,7 @@ namespace Emilia.Models.ProductViewModel
         {
             if (!String.IsNullOrEmpty(p.ImgPath))
             {
-                string[] path = p.ImgPath.Split(";");
+                string[] path = p.ImagePath();
                 return path[0];
             }
 
@@ -32,11 +32,16 @@ namespace Emilia.Models.ProductViewModel
         {
             if (!String.IsNullOrEmpty(p.ImgPath))
             {
-                string[] path = p.ImgPath.Split(";");
+                string[] path = p.ImagePath();
                 return (path.Length - 1) < 0 ? 0 : (path.Length - 1);
             }
 
             return 0;
+        }
+
+        public static string[] ImagePath(this Product p)
+        {
+            return p.ImgPath.Split(";");
         }
     }
 }

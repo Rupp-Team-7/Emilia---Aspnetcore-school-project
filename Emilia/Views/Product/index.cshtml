@@ -1,6 +1,9 @@
-@model IEnumerable<Emilia.Models.Product>
+@model Emilia.Models.ProductViewModel.ProductIndexViewModel
+@using Emilia.Models
+@using Emilia.Models.ProductViewModel
 
-@{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } @await Html.PartialAsync("productNav")
+@{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } 
+@await Html.PartialAsync("productNav")
 
 <div class="row">
     <div class="col-sm-8">
@@ -15,17 +18,17 @@
         </form>
         <div class="light_border " id="product_panel">
             <ul>
-                @foreach(var item in Model)
+                @foreach(var item in Model.Products)
                 {
                     <li class="product_item clearfix">
-                            <img  src="~/images/shirt.jpg" alt="">
+                            <img  src="~/@item.FirstImage()" alt="">
                             <div class="product_detail_wrapper">
                                 <span>@Html.DisplayFor(m => item.Id)</span>
                                 <span>@Html.DisplayFor(m => item.Name)</span>
                                 <span>@Html.DisplayFor(m => item.category)</span>
                                 <span>$@Html.DisplayFor(m => item.UnitPrice)</span>
                                 <span>@Html.DisplayFor(m => item.Created)</span>
-                                <span>4 Photo</span>
+                                <span class="text-muted">@item.ImageCount() Photo</span>
                             </div>
                             <div class=" float-right">
                                 <a class=" fa fa-info " asp-controller="product" asp-action="detail" asp-route-id="@item.Id"></a>

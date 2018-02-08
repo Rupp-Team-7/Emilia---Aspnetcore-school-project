@@ -4,6 +4,10 @@
 
 @await Html.PartialAsync("productNav")
 
+ @{
+    var count = Model.GeImagePath().Length - 1;
+}
+
 
 <!-- <form class="form light_border" id="form_create_product">
 
@@ -97,7 +101,7 @@
 <h3>Change product infomation</h3>
     <div class=" row light_border">
         <div class="col-sm-6 ">
-            <form asp-controller="Product" asp-action="Edit" asp-route-id ="@ViewBag.IdToEdit" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
+            <form id="form-create-product" asp-controller="Product" asp-action="Edit" asp-route-id ="@ViewBag.IdToEdit" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input asp-for="PhotoPath">
                         <label asp-for="ProductCode" class="col-form-label col-sm-3"></label>
@@ -126,7 +130,7 @@
                 <div class="col-sm-5">
                     <input asp-for="UnitPrice"  class="form-control form-control-sm" placeholder="$">
                 </div>
-                <label class="text-info h5" id="photo-label">Photo: 0</label>
+                <label class="text-info h5" id="photo-label">Photo: @count</label>
             </div>
             <div class="form-group row">
                 <label asp-for="BrandName" class="col-form-label col-sm-3"></label>
@@ -172,7 +176,8 @@
                     var paths = Model.GeImagePath();
                     for (var i = 0; i < paths.Length - 1; i++)
                     {
-                        <img class="inline_box" src="~/@paths[i]">
+                        <button data-remove-img="@i" type="button" class="_remover fa fa-remove"><i class=""></i></button>
+                        <img data-id="@i" class="inline_box" src="~/@paths[i]">
                     }
                 }
 
@@ -182,4 +187,5 @@
         </div>
     </div>
 
+    <p id="photo-data-holder" class="">@Model.PhotoPath</p>
 

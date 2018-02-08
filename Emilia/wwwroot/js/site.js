@@ -83,7 +83,7 @@ $(document).ready(function () {
                     );
                 }
                 $("#photo-label").text("Photo:" + (path.length - 1));
-                $("#PhotoPath").val(model.photoPath);
+                $("#photo-data-holder").text(model.photoPath);
             }
         })
         .fail(function () {
@@ -106,6 +106,31 @@ $(document).ready(function () {
                 $("<div></div>").addClass("inline_box")
             );
         }
+    });
+
+    $("#form-create-product").submit(function(){
+        $("#PhotoPath").val($("#photo-data-holder").text());
+    });
+
+    $("button._remover").click(function(e){
+        var imgId = parseInt($(this).attr("data-remove-img"));
+        var img = $("img[data-id='" + imgId + "']");
+
+        var path = $("#photo-data-holder").text();
+        path = path.split(";");
+        console.log("path[]" + path);
+
+        img.remove();
+        $(this).remove();
+
+        var newPath = "";
+        $("img[data-id]").each(function(i, item){
+           newPath += ($(item).attr("src") + ";").replace("/", ""); 
+        });
+
+        console.log(newPath);
+
+        $("#photo-data-holder").text(newPath);
     });
 });
 

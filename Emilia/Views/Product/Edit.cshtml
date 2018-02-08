@@ -1,8 +1,11 @@
+@model  Emilia.Models.ProductViewModel.CreateProductViewModel
+
 @{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } 
+
 @await Html.PartialAsync("productNav")
 
-<h3>Change product infomation</h3>
-<form class="form light_border" id="form_create_product">
+
+<!-- <form class="form light_border" id="form_create_product">
 
     <div class=" row">
         <div class="col-sm-6 ">
@@ -49,9 +52,7 @@
                     <input type="text" class="form-control form-control-sm" placeholder="N/A">
                 </div>
             </div>
-            <!-- <div class="form-group row">
-                       
-                    </div> -->
+          
             <div class="form-group row ">
                 <label for="" class="col-form-label col-sm-3">Description:</label>
                 <div class="col-sm-8">
@@ -90,4 +91,95 @@
     </div>
 
 
-</form>
+</form> -->
+
+
+<h3>Change product infomation</h3>
+    <div class=" row light_border">
+        <div class="col-sm-6 ">
+            <form asp-controller="Product" asp-action="Edit" asp-route-id ="@ViewBag.IdToEdit" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <input asp-for="PhotoPath">
+                        <label asp-for="ProductCode" class="col-form-label col-sm-3"></label>
+                        <div class="col-sm-8">
+                            <input  class="form-control form-control-sm" asp-for="ProductCode" placeholder="code: P001E3">
+                        </div>
+                    </div>
+            <div class="form-group row">
+                <label asp-for="Name" class="col-form-label col-sm-3"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Name" class="form-control form-control-sm" placeholder="(eg. Stylish T-Shirt)">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Category" class="col-form-label col-sm-3"></label>
+                <div class="col-sm-2">
+                    <select class="custom-select custom-select-sm" asp-for="Category" asp-items="@Html.GetEnumSelectList<Category>()" ></select>
+                </div>
+                <label asp-for="Tags" class="col-form-label col-sm-1"></label>
+                <div class="col-sm-5">
+                    <input asp-for="Tags"  class="form-control form-control-sm" placeholder="(eg. T-Shirt, couple, light)">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="UnitPrice" class="col-form-label col-sm-3"></label>
+                <div class="col-sm-5">
+                    <input asp-for="UnitPrice"  class="form-control form-control-sm" placeholder="$">
+                </div>
+                <label class="text-info h5" id="photo-label">Photo: 0</label>
+            </div>
+            <div class="form-group row">
+                <label asp-for="BrandName" class="col-form-label col-sm-3"></label>
+                <div class="col-sm-3">
+                    <input asp-for="BrandName" class="form-control form-control-sm" placeholder="No brand">
+                </div>
+                <label asp-for="Origin" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-3">
+                    <input asp-for="Origin" class="form-control form-control-sm" placeholder="N/A">
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                       
+                    </div> -->
+            <div class="form-group row ">
+                <label asp-for="Description" class="col-form-label col-sm-3"></label>
+                <div class="col-sm-8">
+                    <textarea class="form-control form-control-sm" asp-for="Description" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Specification" class="col-form-label col-sm-3"></label>
+                <div class="col-sm-8">
+                    <textarea class="form-control form-control-sm" asp-for="Specification" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-md " type="submit">Publish</button>
+                <button id="btn-product-create-clear" class="btn btn-danger btn-md" type="reset">Clear</button>
+            </div>
+            </form>
+        </div>
+
+        <div class="col-sm-4" id="imgage_uploader">
+            <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
+                <div class="uploader">
+                <input class="uploader_input" type="file" id="Files" name="Files" multiple>
+                <label class="uploader_label" >Attach photos</label>
+            </div>
+            <div id="photo_container">
+                
+                @{
+                    var paths = Model.GeImagePath();
+                    for (var i = 0; i < paths.Length - 1; i++)
+                    {
+                        <img class="inline_box" src="~/@paths[i]">
+                    }
+                }
+
+            </div>
+            <button style="width:100%" class="btn btn-primary" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
+

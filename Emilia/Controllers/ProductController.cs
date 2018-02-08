@@ -14,6 +14,7 @@ using Emilia.Models.ProductViewModel;
 
 namespace Emilia.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private ApplicationDbContext db;
@@ -85,16 +86,55 @@ namespace Emilia.Controllers
 
 
         // GET: /Product/Edit/1
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if(!id.HasValue)
+                return BadRequest();
+
+            var sellerid = await GetSellerID();
+            var product = await db.Products.Include(p => p.Details)
+                .SingleOrDefaultAsync(p => p.SellerId == sellerid && p.Id == id );
+
+            CreateProductViewModel model = new CreateProductViewModel(product);
+
+            ViewBag.IdToEdit = product.Id;
+
+            return View(model);
         }
 
-        // [HttpPost]
-        // public IActionResult Edit()
-        // {
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, CreateProductViewModel model)
+        {
+             if(!id.HasValue)
+                return BadRequest();
 
-        // }
+            var sellerid = await GetSellerID();
+            var productToEdit = await db.Products.Include(p => p.Details)
+                .SingleOrDefaultAsync(p => p.SellerId == sellerid && p.Id == id );
+            
+            if(productToEdit.Name != model.Name)
+                productToEdit.Name = model.Name;
+            if(productToEdit.category != model.Category)
+                productToEdit.category = model.Category;
+            if(productToEdit.UnitPrice != model.UnitPrice)
+                productToEdit.UnitPrice = model.UnitPrice;
+            
+            if(productToEdit.Details.BrandName != model.BrandName)
+                productToEdit.Details.BrandName  = model.BrandName;
+            if(productToEdit.Details.Origin != model.Origin)
+                productToEdit.Details.Material = model.ProductCode;
+            if(productToEdit.Details.Specification != model.Specification)
+                productToEdit.Details.Specification = model.Specification;
+            if(productToEdit.Details.Description != model.Description)
+                productToEdit.Details.Description = model.Description;
+            
+            if(productToEdit.ImgPath != model.PhotoPath)
+                productToEdit.ImgPath = model.PhotoPath;
+
+            await db.SaveChangesAsync();
+
+            return Ok(productToEdit);
+        }
 
         //Get: /Product/Detail/1
         public async Task<IActionResult> Detail(int? id)

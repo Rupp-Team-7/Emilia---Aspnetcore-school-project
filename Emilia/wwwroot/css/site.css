@@ -156,6 +156,8 @@
     min-height: 100vh;
     transition: margin-left 0.3s ease;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
+    position: sticky;
+    top: 0;
 }
 
 
@@ -237,6 +239,10 @@ img.inline_box {
     height: 28%;
 }
 
+
+#photo-data-holder {
+    display: none;
+}
 
 #imgage_uploader .inline_box {
     width: 24%;
@@ -396,6 +402,17 @@ li.product_item:hover a {
     top: 30%;
     left: 15%;
     margin: auto;
+}
+#ProductDetail .card {
+    border-radius: 0;
+}
+.card-img-group {
+    width: 100%;
+}
+.card-img-member {
+    display: inline-block;
+    width: 20%;
+    height: auto;
 }
 
 /* rith */

@@ -1,0 +1,86 @@
+@model Emilia.Models.Product 
+@using Emilia.Models.ProductViewModel
+
+@{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } 
+@await Html.PartialAsync("productNav")
+
+
+<div class="row" id="ProductDetail">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Product info</h4>
+            </div>
+            <div class="card-body">
+                <h6 class="card-text">
+                    <span class="text-info">Name:</span>
+                    <span>@Html.DisplayFor(m => Model.Name)</span>
+                </h6>
+                <h6 class="card-text">
+                    <span class="text-info">Price:</span>
+                    <span class="">@Html.DisplayFor(m => Model.UnitPrice)</span>
+                </h6>
+                <h6 class="card-text">
+                    <span class="text-info">Name:</span>
+                    <span>@Html.DisplayFor(m => Model.category)</span>
+                </h6>
+                <h6 class="card-text">
+                    <span class="text-info">Published on:</span>
+                    <span>@Html.DisplayFor(m => Model.Created)</span>
+                </h6>
+            </div>
+        </div>
+        <br>
+         <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Product details</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="card-text">
+                    <span class="text-info">Brand name:</span>
+                    <span>@Html.DisplayFor(m => Model.Details.BrandName)</span>
+                </h6>
+                <h6 class="card-text">
+                    <span class="text-info">Made in:</span>
+                    <span>@Html.DisplayFor(m => Model.Details.Origin)</span>
+                </h6>
+                <h6 class="card-text">
+                    <span class="text-info">Custom code:</span>
+                    <span>@Html.DisplayFor(m => Model.Details.Material)</span>
+                </h6>
+                <h6 class="card-text">
+                    <span class="text-info">Description</span>
+                </h6>
+                <p class="card-text text-secondary text-muted">@Html.DisplayFor(m => Model.Details.Description)</p>
+
+                <h6 class="card-text">
+                        <span class="text-info">Specifications</span>
+                    </h6>
+                    <p class="card-text text-muted">@Html.DisplayFor(m => Model.Details.Specification)</p>
+            </div>
+             <div class="card-footer">
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="Home" asp-action="Product" asp-route-id="@Model.Id" class="btn btn-primary">View in shop</a>
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">Remove</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="">
+            <h4 class="card-header">Photos: @Model.ImageCount()</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-img-group card-text">
+                    @{
+                        string[] paths = Model.ImagePath();
+                        for (var i=0; i<paths.Length - 1; i++)
+                        {
+                            <img class="card-img-member" src="~/@paths[i]">
+                        }
+                    }
+            </h5>
+                
+        </div>
+    </div>
+</div>

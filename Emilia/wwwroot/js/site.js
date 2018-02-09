@@ -5,6 +5,12 @@ $(document).ready(function () {
     $("#btnNav").click(function (e) {
         $("#dash-side").toggleClass("active");
 
+        if($("#dash-side").hasClass("active"))
+            document.cookie = "dash_active=active;path=/;";
+        else
+            document.cookie = "dash_active=null;path=/;";
+        
+           // console.log(document.cookie);
     });
 
     $("button[data-target='#logo_uploader']").click(function (sender) {
@@ -76,14 +82,15 @@ $(document).ready(function () {
         .done(function (model, code) {
             if (code === "success") {
                 var path = (model.photoPath + "").split(";");
-                $("#photo_container").empty();
+                $("#newPhoto").empty();
                 for (var i = 0; i < path.length - 1; i++) {
-                    $("#photo_container").prepend(
-                        $("<img>").addClass("inline_box").attr("src", "/" + path[i])
+                    $("#newPhoto").prepend(
+                        $("<img>").addClass("inline_box").attr("src", "/" + path[i]).attr("data-id", "-1")
                     );
                 }
                 $("#photo-label").text("Photo:" + (path.length - 1));
-                $("#PhotoPath").val(model.photoPath);
+                var newValue = $("#photo-data-holder").text() + model.photoPath;
+                $("#photo-data-holder").text(newValue);
             }
         })
         .fail(function () {
@@ -92,20 +99,45 @@ $(document).ready(function () {
 
 
         function DoBeforeSend() {
-            $("#photo_container").empty();
-            $("#photo_container").append($("<span></span>").addClass("fa fa-circle-o-notch fa-3x fa-fw fa-spin text-info"))
+            $("#newPhoto").empty();
+            $("#newPhoto").append($("<span></span>").addClass("fa fa-circle-o-notch fa-3x fa-fw fa-spin text-info"))
         }
 
     });
 
     $("#btn-product-create-clear").click(function () {
-        $("#photo_container").empty();
+        $("#newPhoto").empty();
         $("#photo-label").text("Photo: 0");
         for (var i = 0; i < 4; i++) {
-            $("#photo_container").prepend(
+            $("#newPhoto").prepend(
                 $("<div></div>").addClass("inline_box")
             );
         }
+    });
+
+    $("#form-create-product").submit(function(){
+        $("#PhotoPath").val($("#photo-data-holder").text());
+    });
+
+    $("button._remover").click(function(e){
+        var imgId = parseInt($(this).attr("data-remove-img"));
+        var img = $("img[data-id='" + imgId + "']");
+
+        var path = $("#photo-data-holder").text();
+        path = path.split(";");
+        console.log("path[]" + path);
+
+        img.remove();
+        $(this).remove();
+
+        var newPath = "";
+        $("img[data-id]").each(function(i, item){
+           newPath += ($(item).attr("src") + ";").replace("/", ""); 
+        });
+
+        console.log(newPath);
+
+        $("#photo-data-holder").text(newPath);
     });
 });
 

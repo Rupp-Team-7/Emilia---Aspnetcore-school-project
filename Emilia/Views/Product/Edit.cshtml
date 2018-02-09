@@ -1,13 +1,12 @@
 @model  Emilia.Models.ProductViewModel.CreateProductViewModel
 
-@{ Layout = "~/Views/Shared/_Dashboard.cshtml"; } 
+@{ 
+    Layout = "~/Views/Shared/_Dashboard.cshtml"; 
+
+     string msg = ViewBag.ReturnMessage;
+} 
 
 @await Html.PartialAsync("productNav")
-
- @{
-    var count = Model.GeImagePath().Length - 1;
-}
-
 
 <!-- <form class="form light_border" id="form_create_product">
 
@@ -97,7 +96,7 @@
 
 </form> -->
 
-
+@Html.Partial("_Message", msg)
 <h3>Change product infomation</h3>
     <div class=" row light_border">
         <div class="col-sm-6 ">
@@ -130,7 +129,6 @@
                 <div class="col-sm-5">
                     <input asp-for="UnitPrice"  class="form-control form-control-sm" placeholder="$">
                 </div>
-                <label class="text-info h5" id="photo-label">Photo: @count</label>
             </div>
             <div class="form-group row">
                 <label asp-for="BrandName" class="col-form-label col-sm-3"></label>
@@ -168,24 +166,31 @@
             <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
                 <div class="uploader">
                 <input class="uploader_input" type="file" id="Files" name="Files" multiple>
-                <label class="uploader_label" >Attach photos</label>
+                <label class="uploader_label" >Browse</label>
             </div>
             <div id="photo_container">
-                
-                @{
-                    var paths = Model.GeImagePath();
-                    for (var i = 0; i < paths.Length - 1; i++)
-                    {
-                        <button data-remove-img="@i" type="button" class="_remover fa fa-remove"><i class=""></i></button>
-                        <img data-id="@i" class="inline_box" src="~/@paths[i]">
+                <div id="newPhoto">
+
+                </div>
+                <div>
+                    <hr>
+                    @{
+                        var paths = Model.GeImagePath();
+                        for (var i = 0; i < paths.Length - 1; i++)
+                        {
+                            <button data-remove-img="@i" type="button" class="_remover fa fa-remove"><i class=""></i></button>
+                            <img data-id="@i" class="inline_box" src="~/@paths[i]">
+                        }
                     }
-                }
+                </div>
+
+              
 
             </div>
-            <button style="width:100%" class="btn btn-primary" type="submit">Add</button>
+            <button style="width:100%" class="btn btn-primary" type="submit">Attach</button>
             </form>
         </div>
     </div>
 
-    <p id="photo-data-holder" class="">@Model.PhotoPath</p>
+    <p id="photo-data-holder" class="hidden-xl-up">@Model.PhotoPath</p>
 

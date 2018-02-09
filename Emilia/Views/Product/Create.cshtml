@@ -73,17 +73,23 @@
             <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
                 <div class="uploader">
                 <input class="uploader_input" type="file" id="Files" name="Files" multiple>
-                <label class="uploader_label" >Attach photos</label>
+                <label class="uploader_label" >Browse</label>
             </div>
-            <div id="photo_container">
-                <div class="inline_box"></div>
-                <div class="inline_box"></div>
-                <div class="inline_box"></div>
-                <div class="inline_box"></div>
+
+
+             <div id="photo_container">
+                <div id="newPhoto">
+                    <div class="inline_box"></div>
+                    <div class="inline_box"></div>
+                    <div class="inline_box"></div>
+                    <div class="inline_box"></div>
+                    </div>
+                <div>
             </div>
-            <button style="width:100%" class="btn btn-primary" type="submit">Add</button>
+
+            <button style="width:100%" class="btn btn-primary" type="submit">Attach</button>
             </form>
         </div>
     </div>
 
-    <p id="photo-data-holder" class="">@Model.PhotoPath</p>
+    <p id="photo-data-holder" class="hidden-xs-up"></p>

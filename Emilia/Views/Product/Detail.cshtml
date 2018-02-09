@@ -30,32 +30,10 @@
                 </h6>
             </div>
         </div>
-    </div>
-
-    <div class="col-sm-6">
-        <div class="">
-            <h4 class="card-header">Photos: @Model.ImageCount()</h4>
-        </div>
-        <div class="card-body">
-            <div class="card-img-group ">
-                    @{
-                        string[] paths = Model.ImagePath();
-                        for (var i=0; i<paths.Length - 1; i++)
-                        {
-                            <img class="card-img-member" src="~/@paths[i]">
-                        }
-                    }
-            </div>
-                
-        </div>
-    </div>
-
-    <div class="col-sm-12 cleafix"><br></div>
-
-    <div class="col-sm-6">
-        <div class="card">
+        <br>
+         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Product details</h4>
+                <h5 class="card-title">Product details</h5>
             </div>
             <div class="card-body">
                 <h6 class="card-text">
@@ -80,16 +58,29 @@
                     </h6>
                     <p class="card-text text-muted">@Html.DisplayFor(m => Model.Details.Specification)</p>
             </div>
-        </div>
-    </div>
-    
-     <div class="col-sm-6">
-        <div class="card text-center">
-            <div class="card-body">
+             <div class="card-footer">
                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
                 <a asp-controller="Home" asp-action="Product" asp-route-id="@Model.Id" class="btn btn-primary">View in shop</a>
                 <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">Remove</a>
             </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="">
+            <h4 class="card-header">Photos: @Model.ImageCount()</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-img-group card-text">
+                    @{
+                        string[] paths = Model.ImagePath();
+                        for (var i=0; i<paths.Length - 1; i++)
+                        {
+                            <img class="card-img-member" src="~/@paths[i]">
+                        }
+                    }
+            </h5>
+                
         </div>
     </div>
 </div>

@@ -1,3 +1,11 @@
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor http
+
+ @{
+    var isActive = http.HttpContext.Request.Cookies["dash_active"];
+}
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +25,12 @@
     </environment>
 
     @RenderSection("Style",required: false)
+
 </head>
 <body>
-
+     
     <div class="wrapper">
-        <nav id="dash-side" class="active">
+        <nav id="dash-side" class="@isActive">
         <nav class="navbar navbar-expand-lg bg-success pl-1 ">
             <a style="color:white;" class="navbar-brand" href="/home/index">Back to Home</a>
         </nav>
@@ -40,7 +49,7 @@
     
         <div id="dash-main">
             
-            <nav class="navbar navbar-expand-lg bg-light pl-1 ">
+            <nav class="navbar navbar-expand-lg bg-light pl-1 sticky-top">
                 <button id="btnNav" class="dash-btn">&larr;</button>
                 <span class="pr-2">|</span> <a class="navbar-brand" href="/dashboard/index">Dashboard</a>
                 <div id="collapserbar" class="collapse navbar-collapse">
@@ -84,6 +93,8 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+
 
 </body>
 </html>

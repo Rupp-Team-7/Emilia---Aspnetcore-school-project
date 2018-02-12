@@ -273,7 +273,8 @@ img._product_img {
 }
 
 #product_panel {
-    height: 380px;
+    height: 400px;
+    width: 100%;
     overflow-y: auto;
 }
 #product_panel > ul {
@@ -281,6 +282,10 @@ img._product_img {
     padding: 0;
     width: 100%;
 
+}
+
+.btnPub, .btnUnpub {
+    transition: all 0.3s ease;
 }
 
 .product_item {
@@ -305,13 +310,13 @@ img._product_img {
     min-width: 80%;
     float: left;
 }
-#product_panel a {
+/* #product_panel a {
     color: rgb(175, 166, 166);
     font-size: 1.5rem;
     line-height: 2;
     margin: 0 0.2rem;
     display: none;
-}
+} */
 #product_panel a:hover{
     text-decoration: none;
     color: rgba(9, 223, 45, 0.616);

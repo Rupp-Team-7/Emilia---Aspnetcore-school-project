@@ -67,7 +67,8 @@ namespace Emilia.Controllers
                     Description = model.Description,
                     Specification = model.Specification,
                     Origin = string.IsNullOrEmpty(model.Origin) ? "N/A" : model.Origin,
-                    Material = model.ProductCode
+                    Code = model.ProductCode,
+                    Tags = model.Tags
                 },
                 ImgPath = model.PhotoPath
             };
@@ -127,7 +128,7 @@ namespace Emilia.Controllers
             if (productToEdit.Details.BrandName != model.BrandName)
                 productToEdit.Details.BrandName = model.BrandName;
             if (productToEdit.Details.Origin != model.Origin)
-                productToEdit.Details.Material = model.ProductCode;
+                productToEdit.Details.Code = model.ProductCode;
             if (productToEdit.Details.Specification != model.Specification)
                 productToEdit.Details.Specification = model.Specification;
             if (productToEdit.Details.Description != model.Description)
@@ -135,6 +136,9 @@ namespace Emilia.Controllers
 
             if (productToEdit.ImgPath != model.PhotoPath)
                 productToEdit.ImgPath = model.PhotoPath;
+
+            if(productToEdit.Details.Tags != model.Tags)
+                productToEdit.Details.Tags = model.Tags;
 
             await db.SaveChangesAsync();
 
@@ -154,6 +158,25 @@ namespace Emilia.Controllers
                 .SingleOrDefaultAsync(p => p.Id == id);
 
             return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Publish(int? id, bool? published)
+        {
+            if(!id.HasValue || !published.HasValue)
+                return BadRequest(new {error = published});
+
+            var sellerid = await GetSellerID();
+            var product = await db.Products.SingleOrDefaultAsync(p => p.SellerId == sellerid && p.Id == id);
+
+            if(product == null)
+                return NotFound("product null");
+
+          
+                product.Published =  published.Value;
+                await db.SaveChangesAsync();
+
+            return Ok(published);
         }
 
         private async Task<int> GetSellerID()

@@ -135,9 +135,47 @@ $(document).ready(function () {
            newPath += ($(item).attr("src") + ";").replace("/", ""); 
         });
 
-        console.log(newPath);
 
         $("#photo-data-holder").text(newPath);
+    });
+
+    $(".btnUnpub").click(function(e){
+        e.preventDefault();
+        var btn = $(this);
+        url = btn.attr("href");
+        $.ajax(
+            {
+                method: "POST",
+                url: url,
+                data: { published: false },
+                processData: true
+            }
+        )
+        .done(function(code, model){
+
+            $(btn).toggleClass("d-none");
+            $(".btnPub[data-order=" + $(btn).attr('data-order') + "]").toggleClass("d-none");
+        });
+    });
+
+    $(".btnPub").click(function(e){
+        e.preventDefault();
+        var btn = $(this);
+        url = $(this).attr("href");
+    
+        $.ajax(
+            {
+                method: "POST",
+                url: url,
+                data: { published: true },
+                processData:true
+            }
+        )
+        .done(function(code, model){
+
+            $(btn).toggleClass("d-none");
+            $(".btnUnpub[data-order=" + $(btn).attr('data-order') + "]").toggleClass("d-none");
+        });
     });
 });
 

@@ -22,6 +22,7 @@ namespace Emilia.Models
         public string ImgPath {get; set;}
         public int SellerId { get; set; }
         public int DetailId { get; set; }
+        public bool Published {get; set;} = true;
 
         public ProductDetail Details { get; set; }
         public Seller Seller { get; set; }

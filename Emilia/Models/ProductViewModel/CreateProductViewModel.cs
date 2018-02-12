@@ -55,11 +55,12 @@ namespace Emilia.Models.ProductViewModel
             this.UnitPrice = p.UnitPrice;
             
             this.Origin = p.Details.Origin;
-            this.ProductCode = p.Details.Material;
+            this.ProductCode = p.Details.Code;
             this.Specification = p.Details.Specification;
             this.Description = p.Details.Description;
             this.BrandName = p.Details.BrandName;
             this.PhotoPath = p.ImgPath;
+            this.Tags = p.Details.Tags;
         }
     }
 }

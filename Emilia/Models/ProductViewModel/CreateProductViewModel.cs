@@ -45,7 +45,22 @@ namespace Emilia.Models.ProductViewModel
         [HiddenInput]
         public string PhotoPath {get; set;}
 
+
+        public CreateProductViewModel() { }
+
+        public CreateProductViewModel(Product p)
+        {
+            this.Name = p.Name;
+            this.Category = p.category;
+            this.UnitPrice = p.UnitPrice;
+            
+            this.Origin = p.Details.Origin;
+            this.ProductCode = p.Details.Code;
+            this.Specification = p.Details.Specification;
+            this.Description = p.Details.Description;
+            this.BrandName = p.Details.BrandName;
+            this.PhotoPath = p.ImgPath;
+            this.Tags = p.Details.Tags;
+        }
     }
-
-
 }

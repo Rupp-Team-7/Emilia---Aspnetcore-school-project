@@ -5,6 +5,12 @@ $(document).ready(function () {
     $("#btnNav").click(function (e) {
         $("#dash-side").toggleClass("active");
 
+        if($("#dash-side").hasClass("active"))
+            document.cookie = "dash_active=active;path=/;";
+        else
+            document.cookie = "dash_active=null;path=/;";
+        
+           // console.log(document.cookie);
     });
 
     $("button[data-target='#logo_uploader']").click(function (sender) {
@@ -60,8 +66,8 @@ $(document).ready(function () {
     });
 
     $("#form_product_photo_uploader").submit(function (e) {
-       e.preventDefault();
-        
+        e.preventDefault();
+
         var form = $(this)[0];
         var data = new FormData(form);
 
@@ -73,38 +79,103 @@ $(document).ready(function () {
             contentType: false,
             beforeSend: DoBeforeSend
         })
-        .done(function (model, code) { 
-            if(code === "success")
-            {
-                alert("success" + model);
-                $("#PhotoPath").val(model.photoPath);
-
+        .done(function (model, code) {
+            if (code === "success") {
                 var path = (model.photoPath + "").split(";");
-                console.log(path);
-                $("#photo_container").empty();
-                for(var i = 0; i < path.length-1; i++)
-                {
-                    
-                    $("#photo_container").prepend(
-                        $("<div></div>").addClass("")
-                            .append($("<img>").addClass("img").attr("src", "/" + path[i]))
+                $("#newPhoto").empty();
+                for (var i = 0; i < path.length - 1; i++) {
+                    $("#newPhoto").prepend(
+                        $("<img>").addClass("inline_box").attr("src", "/" + path[i]).attr("data-id", "-1")
                     );
                 }
-                
+                $("#photo-label").text("Photo:" + (path.length - 1));
+                var newValue = $("#photo-data-holder").text() + model.photoPath;
+                $("#photo-data-holder").text(newValue);
             }
-          
-
         })
-        .fail(function () { 
-            alert("Unable to upload phtoto"); 
+        .fail(function () {
+            alert("Unable to upload phtoto");
         });
 
-    
-        function DoBeforeSend()
-        {
 
+        function DoBeforeSend() {
+            $("#newPhoto").empty();
+            $("#newPhoto").append($("<span></span>").addClass("fa fa-circle-o-notch fa-3x fa-fw fa-spin text-info"))
         }
 
+    });
+
+    $("#btn-product-create-clear").click(function () {
+        $("#newPhoto").empty();
+        $("#photo-label").text("Photo: 0");
+        for (var i = 0; i < 4; i++) {
+            $("#newPhoto").prepend(
+                $("<div></div>").addClass("inline_box")
+            );
+        }
+    });
+
+    $("#form-create-product").submit(function(){
+        $("#PhotoPath").val($("#photo-data-holder").text());
+    });
+
+    $("button._remover").click(function(e){
+        var imgId = parseInt($(this).attr("data-remove-img"));
+        var img = $("img[data-id='" + imgId + "']");
+
+        var path = $("#photo-data-holder").text();
+        path = path.split(";");
+        console.log("path[]" + path);
+
+        img.remove();
+        $(this).remove();
+
+        var newPath = "";
+        $("img[data-id]").each(function(i, item){
+           newPath += ($(item).attr("src") + ";").replace("/", ""); 
+        });
+
+
+        $("#photo-data-holder").text(newPath);
+    });
+
+    $(".btnUnpub").click(function(e){
+        e.preventDefault();
+        var btn = $(this);
+        url = btn.attr("href");
+        $.ajax(
+            {
+                method: "POST",
+                url: url,
+                data: { published: false },
+                processData: true
+            }
+        )
+        .done(function(code, model){
+
+            $(btn).toggleClass("d-none");
+            $(".btnPub[data-order=" + $(btn).attr('data-order') + "]").toggleClass("d-none");
+        });
+    });
+
+    $(".btnPub").click(function(e){
+        e.preventDefault();
+        var btn = $(this);
+        url = $(this).attr("href");
+    
+        $.ajax(
+            {
+                method: "POST",
+                url: url,
+                data: { published: true },
+                processData:true
+            }
+        )
+        .done(function(code, model){
+
+            $(btn).toggleClass("d-none");
+            $(".btnUnpub[data-order=" + $(btn).attr('data-order') + "]").toggleClass("d-none");
+        });
     });
 });
 

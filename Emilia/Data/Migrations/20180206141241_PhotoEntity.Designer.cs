@@ -12,9 +12,10 @@ using System;
 namespace Emilia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180206141241_PhotoEntity")]
+    partial class PhotoEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,8 +136,6 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<bool>("Published");
-
                     b.Property<int>("SellerId");
 
                     b.Property<decimal>("UnitPrice");
@@ -159,15 +158,13 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("BrandName");
 
-                    b.Property<string>("Code");
-
                     b.Property<string>("Description");
+
+                    b.Property<string>("Material");
 
                     b.Property<string>("Origin");
 
                     b.Property<string>("Specification");
-
-                    b.Property<string>("Tags");
 
                     b.HasKey("Id");
 

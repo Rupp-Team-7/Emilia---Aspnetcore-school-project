@@ -30,6 +30,15 @@
                 "restore"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "Run",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ],
     "presentation": {

@@ -4,11 +4,9 @@
 @await Html.PartialAsync("productNav")
 
 <h3>Add new item</h3>
-
-
     <div class=" row light_border">
         <div class="col-sm-6 ">
-            <form asp-controller="Product" asp-action="Create" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
+            <form id="form-create-product" asp-controller="Product" asp-action="Create" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input asp-for="PhotoPath">
                         <label asp-for="ProductCode" class="col-form-label col-sm-3"></label>
@@ -37,6 +35,7 @@
                 <div class="col-sm-5">
                     <input asp-for="UnitPrice"  class="form-control form-control-sm" placeholder="$">
                 </div>
+                <label class="text-info h5" id="photo-label">Photo: 0</label>
             </div>
             <div class="form-group row">
                 <label asp-for="BrandName" class="col-form-label col-sm-3"></label>
@@ -65,7 +64,7 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-md " type="submit">Publish</button>
-                <button class="btn btn-danger btn-md" type="reset">Clear</button>
+                <button id="btn-product-create-clear" class="btn btn-danger btn-md" type="reset">Clear</button>
             </div>
             </form>
         </div>
@@ -74,18 +73,23 @@
             <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
                 <div class="uploader">
                 <input class="uploader_input" type="file" id="Files" name="Files" multiple>
-                <label class="uploader_label" >Add Photo</label>
+                <label class="uploader_label" >Browse</label>
             </div>
-            <div id="photo_container">
-                <div class="inline_box"></div>
-                <div class="inline_box"></div>
-                <div class="inline_box"></div>
-                <div class="inline_box"></div>
+
+
+             <div id="photo_container">
+                <div id="newPhoto">
+                    <div class="inline_box"></div>
+                    <div class="inline_box"></div>
+                    <div class="inline_box"></div>
+                    <div class="inline_box"></div>
+                    </div>
+                <div>
             </div>
-            
-            <button type="submit">Upload</button>
+
+            <button style="width:100%" class="btn btn-primary" type="submit">Attach</button>
             </form>
         </div>
     </div>
 
-
+    <p id="photo-data-holder" class="hidden-xs-up"></p>

@@ -8,7 +8,7 @@
 @await Html.PartialAsync("productNav")
 
 <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-12">
         <h5>Product list</h5>
         <form class="form form-inline" asp-controller="Product" asp="Index">
             <div class="form-group" >
@@ -30,9 +30,14 @@
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-sm" value="Filter"/>
-            </div>&emsp;&emsp;
+            </div>
+             
+            &emsp;&emsp;
             <a class="nav-link" asp-controller="Product" asp-action="index" asp-route-t="rec" >Recent items</a>&emsp;
             <a class="nav-link" asp-controller="Product" asp-action="index" asp-route-t="old" >Older items</a>
+            <div class="form-group">
+                <input type="reset" class="btn btn-clear btn-sm" value="clear">
+            </div>
         </form>
         <div class="light_border "  id="product_panel" >
             <!-- <ul>
@@ -76,7 +81,7 @@
                         <td >@Html.DisplayFor(m => item.Id)</td>
                         <td >@Html.DisplayFor(m => item.Name)</td>
                         <td >@Html.DisplayFor(m => item.category)</td>
-                        <td >$@Html.DisplayFor(m => item.UnitPrice)</td>
+                        <td ><span>$</span>@Html.DisplayFor(m => item.UnitPrice)</td>
                         <td >@Html.DisplayFor(m => item.Created)</td>
                         <td>
                             <!-- <a class=" fa fa-info " asp-controller="product" asp-action="detail" asp-route-id="@item.Id"></a>
@@ -99,5 +104,4 @@
             <span class="text-dark h5"> Search result:</span> <span class="text-info h5"> @Model.Count</span>
         </div>
     </div>
-    <div class="col-sm-3"></div>
 </div>

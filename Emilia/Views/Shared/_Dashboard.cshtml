@@ -1,10 +1,7 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor http
-
  @{
     var isActive = http.HttpContext.Request.Cookies["dash_active"];
 }
-
-
 
 <!DOCTYPE html>
 <html>
@@ -63,10 +60,6 @@
             
         </div>
     </div>
-
-   
-    
- 
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

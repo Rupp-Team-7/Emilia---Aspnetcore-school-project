@@ -1,28 +1,59 @@
 ﻿@{
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+@model Emilia.Models.OrderingViewModels.OrderingDetailViewModel;
+@using Emilia.Models;
 
 <div class="row">
-    @for (int i = 0; i < 8; i++)
+    @foreach (var i in Model.Orders)
     {
-    <div class="col-sm-3">
-        <div class="wall">
-            <div class="wall-head">
-                <h3>{Prodcut Name}</h3>
-            </div>
-            <div class="wall-body">
-                <img class="img-fluid" src="~/images/533007 (1).png" />
-            </div>
-            <div class="wall-footer">
-                <h3>Customer: <small>{$CusName}</small></h3>
-                <h3>Contect: <small>{$CusPhone}</small></h3><br/>
-                <button type="button" class="btn btn-primary" id="order_@i">Delivery</button>
+        @if (i.Delivery == false)
+        {
+        <div class="col-sm-3">
+            <div class="wall">
+                <div class="wall-head">
+                    <h3>@Html.DisplayFor(m => i.product.Name) </h3>
+                </div>
+                <div class="wall-body">
+                    <img class="img-fluid" src="~/images/002.jpg" width="100px" height="200px"/>
+                </div>
+                <div class="wall-footer">
+                    <h3>Customer: <small>@Html.DisplayFor(m => i.Customer.Firstname) @Html.DisplayFor(m => i.Customer.Lastname)</small></h3>
+                    <h3>Phone: <small>@Html.DisplayFor(m => i.Customer.Phone)</small></h3>
+                    <h3>Quanity: <small>@Html.DisplayFor(m => i.Quanity)</small></h3>
+                    <h3>Total Price: <small>@Html.DisplayFor(m => i.TotalPrice)$</small></h3>
+                    <h3>Order Date: <small>@Html.DisplayFor(m => i.orderDate)</small></h3>
+                    <br />
+                    <button class="btn btn-primary" id="@i.Id">Delivery</button>
+                </div>
             </div>
         </div>
-    </div>
-    }
+        }
+        else
+        {
+        <div class="col-sm-3">
+            <div class="wall">
+                <div class="wall-head">
+                    <h3>@Html.DisplayFor(m => i.product.Name) </h3>
+                </div>
+                <div class="wall-body">
+                    <img class="img-fluid" src="~/images/002.jpg" width="100px" height="200px" />
+                </div>
+                <div class="wall-footer">
+                    <h3>Customer: <small>@Html.DisplayFor(m => i.Customer.Lastname)</small></h3>
+                    <h3>Phone: <small>@Html.DisplayFor(m => i.Customer.Phone)</small></h3>
+                    <h3>Quanity: <small>@Html.DisplayFor(m => i.Quanity)</small></h3>
+                    <h3>Total Price: <small>@Html.DisplayFor(m => i.TotalPrice)$</small></h3>
+                    <h3>Order Date: <small>@Html.DisplayFor(m => i.orderDate)</small></h3>
+                    <br />
+                    <button class="btn btn-dark" id="@i.Id" disabled>Deliveried</button>
+                </div>
+            </div>
+        </div>
+        }
+     }
 </div>
-<div class="row">
+@*<div class="row">
     @for (int i = 0; i < 8; i++)
     {
         <div class="col-sm-3">
@@ -41,18 +72,19 @@
             </div>
         </div>
     }
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+</div>*@
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
     $("button").click(function () {
-        //alert("#" + $(this).attr('id'));
-        $(this).attr('disabled','disabled');
+       // alert("#" + $(this).attr('id'));
+        if ("#" + $(this).attr('id')!="#btnNav"){
+        $(this).attr('disabled', 'disabled');
         $("#" + $(this).attr('id')).text("Deliveried");
         $("#" + $(this).attr('id')).removeClass("btn-primary");
         $("#" + $(this).attr('id')).addClass("btn-dark");
-        
+    }
 
     });
-</script>
+</script>*@
 
 

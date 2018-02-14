@@ -18,6 +18,6 @@ namespace  Emilia.Models
         public Seller Seller {get; set;}
 
         // public int DeliveryId { get; set; }
-        // public Delivery Delivery { get; set; }
+         public Boolean Delivery { get; set; }
     }
 }

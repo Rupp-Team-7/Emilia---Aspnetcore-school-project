@@ -1,33 +1,49 @@
+@model Emilia.Models.ProductViewModel.ProductHomeViewModel;
 <div class="row">
     <div class="col-sm-5">
-        <img class="img-fluid" src="~/images/533007 (1).png" alt="">
-        <div id="pro_img" class="img-group-wrapper">
-        @for(var i = 0; i<=5; i++)
-        {
-            <img class="img-inline" src="~/images/533007 (1).png">
-        }
+        <div class="row">
+            @{ var count=1;}
+            @foreach (var i in Model.Products)
+            {
+                if (count == 1)
+                {
+                    count++;
+                    <div class="col-sm-12">
+                      <img class="img-fluid" src="~/@i.ImgPath" alt="" >
+                    </div>
+                }
+                else
+                {
+                 <div class="col-sm-3">
+                    <img class="img-inline" src="~/@i.ImgPath">  
+                 </div>
+                }
+            
+            }
         </div>
     </div>
+    @foreach (var pro in Model.Products)
+    {
     <div class="col-sm-7">
-        <h2 class="card-title">{Product Name}</h2>
-        <h4 class="card-title">price: ${Price}</h4>
-        <p class="card-text">product description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vero sed quae neque placeat! Odit repellendus, totam excepturi minus eligendi sequi inventore, voluptates possimus vitae aut quo ipsa sapiente eos.</p>
+        <h2 class="card-title"></h2>
+        <h4 class="card-title">Price: @Html.DisplayFor(m => pro.UnitPrice)$</h4>
+        <p class="card-text">Product Description: @Html.DisplayFor(m => pro.Details.Description)</p>
 
         <ul class="list-group">
             <li class=" d-flex list-group-item justify-content-between align-items-center">
                 <span>Product ID</span><span>{Product id}</span>
             </li>
             <li class="d-flex list-group-item justify-content-between align-items-center">
-                <span>Brand Name</span><span>{Brand Name}</span>
+                <span>Brand Name</span><span>@Html.DisplayFor(m => pro.Details.BrandName)</span>
             </li>
             <li class=" d-flex list-group-item justify-content-between align-items-center">
-                <span>Made in</span><span>{Product origin}</span>
+                <span>Made in</span><span>@Html.DisplayFor(m => pro.Details.Origin)</span>
             </li>
             <li class=" d-flex list-group-item justify-content-between align-items-center">
-                <span>Material</span><span>{Product material}</span>
+                <span>Tags</span><span>@Html.DisplayFor(m => pro.Details.Tags)</span>
             </li>
             <li class=" d-flex list-group-item justify-content-between align-items-center">
-                    <span>Seller</span><span><a href="go-to-seller-shop-page">{Seller name}</a></span>
+                    <span>Seller</span><span><a href="go-to-seller-shop-page">@Html.DisplayFor(m => pro.Seller.Name)</a></span>
                 </li>
             <li class=" d-flex list-group-item  align-items-center">
                 <span>Category:</span>
@@ -42,27 +58,28 @@
     <div class="col-sm-7">
             <h3>Order</h3>
         <div class="snipper">
-            <img class="snipper_img" src="~/images/533007 (1).png" alt="">
+            <img class="snipper_img" src="~/@pro.ImgPath" alt="">
             <div class="snipper_text">
-                <h6>Product Name</h6>
-                <p>Unit price : ${price}</p>
+                <h6>@Html.DisplayFor(m => pro.Name)</h6>
+                <p>Unit price :@Html.DisplayFor(m => pro.UnitPrice)</p>
             </div>
         </div>
         <div>
-                <h6>Total price: ${Total Price}</h6>
+                @*<h6>Total price: ${Total Price}</h6>*@
             <form action="" class="form-inline w-100">
-                <input type="hidden" name="productID" value="{ProductID}">
-                <input type="hidden" name="sellerID" value="{SellerID">
+                @*<input type="hidden" name="productID" value="{ProductID}">
+                <input type="hidden" name="sellerID" value="{SellerID">*@
                 <div class="form-group">
                     <!-- <label class="form-label mr-1">Product:</label>
                     <input class="form-control mr-1" type="text" disabled value="{Product ID}" > -->
-                    <label class="form-label mr-1" for="quanity">Quanity:</label>
-                    <input class="form-control mr-1" id="quanity" type="number" value="1">
-                    <input class="btn btn-md" type="submit" value="Purchase"> 
+                    @*<label class="form-label mr-1" for="quanity">Quanity:</label>
+                    <input class="form-control mr-1" id="quanity" type="number" value="1">*@
+                    <a class="btn btn-md" asp-controller="Home" asp-action="Ordering" asp-route-ord="@pro">Order</a>
                 </div>
             </form>
         </div>
     </div>
+    }
     <div class="col-sm-5">
         <h3>Contact infomation</h3>
         

@@ -1,9 +1,10 @@
-﻿ @{ ViewData["Title"] = "Index"; }
+﻿@model Emilia.Models.ProductViewModel.ProductHomeViewModel;
+@using Emilia.Models;
+@{ ViewData["Title"] = "Index"; }
 
 
 <div class="row">
     <div class="col-sm-9 ">
-
         <div class="banner">
             <img class="img-fluid" src="~/images/533007 (1).png" />
             <div class="banner-over">
@@ -12,18 +13,20 @@
         </div>
 
         <div class="mt-2">
-            <h3 class="sec-head-text">New Arrival
+            <h3 class="sec-head-text">
+                New Arrival
                 <span class="float-right">more</span>
             </h3>
             <div class="row">
-                @for (var i = 0; i< 8; i++) { 
+                @foreach (var i in Model.Products)
+                {
                     <div class="col-sm-3 mt-1 p-0">
                         <div class="card">
-                            <img class="card-img-top" src="~/images/533007 (1).png" />
+                            <img class="card-img-top" src="~/@i.ImgPath" />
                             <div class="card-body">
 
                                 <p class="card-text">New Item set just arrive in a day...</p>
-                                <h6 class="left card-title text-danger">$2.0</h6>
+                                <h6 class="left card-title text-danger">@i.UnitPrice</h6>
                                 <button class="right btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Order</button>
                                 <span class=""></span>
                                 <!-- Modal -->
@@ -31,7 +34,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{Product Name}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">@i.Name</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -41,13 +44,13 @@
                                                 <div id="carouselControls" class="carousel slide" data-ride="carousel" data-interval="false">
                                                     <div class="carousel-inner" role="listbox">
                                                         <div class="carousel-item active">
-                                                            <img class="d-block img-fluid" src="~/images/533007 (1).png" alt="First slide">
+                                                            <img class="d-block img-fluid" src="~/@i.ImgPath" alt="First slide">
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <img class="d-block img-fluid" src="~/images/533007 (1).png" alt="Second slide">
+                                                            <img class="d-block img-fluid" src="~/@i.ImgPath" alt="Second slide">
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <img class="d-block img-fluid" src="~/images/533007 (1).png" alt="Third slide">
+                                                            <img class="d-block img-fluid" src="~/@i.ImgPath" alt="Third slide">
                                                         </div>
                                                     </div>
                                                     <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
@@ -59,23 +62,23 @@
                                                         <span class="sr-only">Next</span>
                                                     </a>
                                                 </div>
-                                                <h3>{Prodcut Name}</h3>
-                                                <h4 class="text-danger">{$ Price}</h4>
+                                                <h3>@i.Name</h3>
+                                                <h4 class="text-danger">@i.UnitPrice $</h4>
                                                 <ul class="list-group">
                                                     <li class=" d-flex list-group-item justify-content-between align-items-center">
                                                         <span>Product ID</span><span>{Product id}</span>
                                                     </li>
                                                     <li class="d-flex list-group-item justify-content-between align-items-center">
-                                                        <span>Brand Name</span><span>{Brand Name}</span>
+                                                        <span>Brand Name</span><span>@i.Details.BrandName</span>
                                                     </li>
                                                     <li class=" d-flex list-group-item justify-content-between align-items-center">
-                                                        <span>Made in</span><span>{Product origin}</span>
+                                                        <span>Made in</span><span>@i.Details.Origin</span>
                                                     </li>
                                                     <li class=" d-flex list-group-item justify-content-between align-items-center">
-                                                        <span>Material</span><span>{Product material}</span>
+                                                        <span>Tags</span><span>@i.Details.Tags</span>
                                                     </li>
                                                     <li class=" d-flex list-group-item justify-content-between align-items-center">
-                                                        <span>Seller</span><span><a href="go-to-seller-shop-page">{Seller name}</a></span>
+                                                        <span>Seller</span><span><a href="go-to-seller-shop-page">@i.Seller.Name</a></span>
                                                     </li>
                                                     <li class=" d-flex list-group-item  align-items-center">
                                                         <span>Category:</span>
@@ -88,7 +91,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <a class="btn btn-primary" asp-controller="home" asp-action="Product">Order</a>
+                                                <a class="btn btn-primary" asp-controller="home" asp-action="Product" asp-route-id="@i.Id">Order</a>
                                             </div>
                                         </div>
                                     </div>
@@ -102,22 +105,23 @@
             </div>
         </div>
 
-    <div class="mt-2">
-        <h3 class="sec-head-text">Best Seller</h3>
-        <div class="h-box">
-            <div class="h-container">
-                @for(var i = 0; i< 10; i++){ <div class="h-block mr-2">
-                    <img class="img-fluid rounded-circle" src="~/images/002.jpg" />
-                    <p class="text-center">
-                        <b>Seller @String.Format("00{0}", i)</b>
-                    </p>
+        <div class="mt-2">
+            <h3 class="sec-head-text">Best Seller</h3>
+            <div class="h-box">
+                <div class="h-container">
+                    @for (var i = 0; i < 10; i++)
+                    {<div class="h-block mr-2">
+                            <img class="img-fluid rounded-circle" src="~/images/002.jpg" />
+                            <p class="text-center">
+                                <b>Seller @String.Format("00{0}", i)</b>
+                            </p>
+                        </div>
+                    }
+                </div>
             </div>
-            }
         </div>
-    </div>
-</div>
 
-</div>
+    </div>
     <div class="col-sm-3">
         @await Html.PartialAsync("_SearchPatial")
     </div>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Emilia.Models;
 using Emilia.Data;
+using Emilia.Models.ProductViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Emilia.Controllers
@@ -13,11 +14,16 @@ namespace Emilia.Controllers
     public class HomeController : Controller
     {
 
-       
+        public ApplicationDbContext db;
+        public HomeController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
         //Get: /, /home/
         public IActionResult Index()
         {
-            return View();
+            var model = new ProductHomeViewModel(db.Products.ToList(), db.ProductDetail.ToList(), db.Sellers.ToList());
+            return View(model);
         }
 
         //Get: /Search?querystring...
@@ -34,6 +40,12 @@ namespace Emilia.Controllers
         //GET: /home/Product/1
         public IActionResult Product(int id)
         {
+            var model = new ProductHomeViewModel(db.Products.Where(p=>p.Id==id).ToList(), db.ProductDetail.ToList(), db.Sellers.ToList());
+            return View(model);
+        }
+        public IActionResult Ordering(Product pro)
+        {
+            
             return View();
         }
     }

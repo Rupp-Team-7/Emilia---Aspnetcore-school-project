@@ -12,9 +12,10 @@ using System;
 namespace Emilia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180214101724_rith1")]
+    partial class rith1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,8 +87,6 @@ namespace Emilia.Data.Migrations
                     b.Property<string>("Firstname");
 
                     b.Property<string>("Lastname");
-
-                    b.Property<string>("Phone");
 
                     b.HasKey("Id");
 

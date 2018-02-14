@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Emilia.Models;
 using Emilia.Data;
 using Microsoft.EntityFrameworkCore;
+using Emilia.Models.ShopViewModel;
 
 namespace Emilia.Controllers
 {
@@ -18,19 +19,28 @@ namespace Emilia.Controllers
         {
             this.db = db;
         }
-
-        //Get: /, /shop/
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         
-        public IActionResult Profile(int id)
+        public IActionResult Page(int? id)
         {
-            var model = db.Sellers.SingleOrDefault(s => s.Id == id);
+            if(!id.HasValue)
+            {
+                return BadRequest("Bad request!");
+            }
 
-            // return (model);
+            var shop = db.Sellers.AsNoTracking()
+                .SingleOrDefault(s => s.Id == id);
+
+            if(shop == null)
+                return NotFound();
+
+            var model = new ShopIndexViewmodel {
+                Id = shop.Id,
+                Name = shop.Name,
+                Logo = shop.Logo,
+                Cover = shop.Cover,
+                Type = shop.ShopType,
+                Created = shop.CreatedDate.ToShortDateString()
+            };
 
             return View(model);
         }

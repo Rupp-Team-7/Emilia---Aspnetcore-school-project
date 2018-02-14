@@ -1,0 +1,41 @@
+@model Emilia.Models.ShopViewModel.ShopIndexViewmodel 
+@{ ViewData["Title"] = "Shop"; }
+
+<div class="row">
+    <div class="col-sm-9">
+        <img class="img-fluid page-cover" src="~/@Model.Cover">
+    </div>
+    <div class="col-sm-3">
+        <div class="row">
+            <div class="col-md-12 col-xs-6">
+                <img class="img-fluid page-logo" src="~/@Model.Logo">
+                <div class="card-block">
+                    <h4 class="card-title text-dark">@Model.Name</h4>
+                    <h6 class=" card-title text-muted">@Model.Type</h6>
+                    <span class="h4 m-1 text-danger">&hearts;</span>
+                    <span class="h4 m-1 text-danger">&hearts;</span>
+                    <span class="h4 m-1 text-danger">&hearts;</span>
+                    <span class="h4 m-1 text-danger">&hearts;</span>
+                    <span class="h4 m-1 text-danger">&hearts;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg bg-success">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link text-white" href="">New</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="">Best sell</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="">Staff pick</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="">All</a></li>
+        </ul>
+        <form action="" class="form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control form-control-sm" placeholder="Find">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="text-white btn btn-sm btn-primary">GO</button>
+            </div>
+        </form> 
+</nav>

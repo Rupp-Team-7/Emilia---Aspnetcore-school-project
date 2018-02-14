@@ -93,7 +93,7 @@
             <div class="form-group row">
                 <a asp-controller="ShopManagement" asp-action="index" class="col-sm-2 btn btn-default">Cancel</a>
                 <input  class=" btn btn-primary col-sm-2" type="submit" value="Save change">
-                <a class="btn btn-link col-sm-2 " asp-controller="Shop" asp-action="Profile">Return to shop</a>
+                <a class="btn btn-link col-sm-2 " asp-controller="Shop" asp-action="Page" asp-route-id="@ViewBag.ID">Return to shop</a>
             </div>
       </form>  
     </li>

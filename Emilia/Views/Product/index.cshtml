@@ -8,14 +8,14 @@
 @await Html.PartialAsync("productNav")
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-10">
         <h5>Product list</h5>
         <form class="form form-inline" asp-controller="Product" asp="Index">
             <div class="form-group" >
                 <input name="term" class="form-control form-control-sm" value=@ViewData["term"] type="text" placeholder="Code or Name">
             </div>
             <div class="form-group">
-                <select class="custom-select custom-select-sm" name="pub" ViewData["pub"] id="pub">
+                <select class="custom-select custom-select-sm" name="pub" id="pub">
                     <option selected=@(Int32.Parse(ViewData["pub"].ToString())==0) value="0">All</option>
                     <option selected=@(Int32.Parse(ViewData["pub"].ToString())==1) value="1">Active Only</option>
                     <option selected=@(Int32.Parse(ViewData["pub"].ToString())==2) value="2">NoActive Only</option>
@@ -39,7 +39,7 @@
                 <input type="reset" class="btn btn-clear btn-sm" value="clear">
             </div>
         </form>
-        <div class="light_border "  id="product_panel" >
+        <div  id="product_panel" >
             <!-- <ul>
                 @foreach(var item in Model.Products)
                 {

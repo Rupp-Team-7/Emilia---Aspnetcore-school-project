@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Emilia.Controllers
 {
+    [Authorize]
     public class ShopManagementController : Controller
     {
         private UserManager<ApplicationUser> userManager;
@@ -46,8 +47,7 @@ namespace Emilia.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
-
-            var seller = await db.Sellers.FirstOrDefaultAsync(x => x.Id == user.SellerID);
+            var seller = await db.Sellers.SingleOrDefaultAsync(x => x.Id == user.SellerID);
 
             // return Ok(seller);
 
@@ -71,6 +71,7 @@ namespace Emilia.Controllers
                 BackgroundPath = seller.Cover
             };
 
+            ViewBag.ID = seller.Id;
             return View(model);
         }
 

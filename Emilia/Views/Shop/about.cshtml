@@ -1,3 +1,25 @@
-
+@model Emilia.Models.ShopViewModel.ShopAboutViewmodel 
 @await Html.PartialAsync("shopheading")
-<h1>About</h1>
+<br><br>
+
+<p class="h6 lead">@Model.About</p>
+
+<h6>
+    <strong>Start from:</strong>@Html.DisplayFor(m => m.Created)
+</h6>
+
+<h6>
+    <strong>Category:</strong>@Html.DisplayFor(m => m.Type)
+</h6>
+
+<address>
+    <strong>Location:</strong>@Html.DisplayFor(m => m.Address)
+</address>
+
+<h6>
+    <strong>Contact:</strong>@Html.DisplayFor(m => m.Tel)
+</h6>
+
+<h6>
+    <strong>Follow us:</strong> <span class="fa fa-1x fa-facebook"></span>
+</h6>

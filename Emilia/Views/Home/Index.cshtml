@@ -1,4 +1,6 @@
-﻿ @{ ViewData["Title"] = "Index"; }
+﻿@model Emilia.Models.HomeViewmodel.IndexViewmodel
+
+ @{ ViewData["Title"] = "Index"; }
 
 
 <!-- <div class="row">
@@ -57,14 +59,14 @@
             <span class="float-right">more</span>
         </h3>
         <div class="row px-3" id="shop-product-item">
-            @for(var i=0; i<=15; i++) {
+            @foreach(var item in Model.ShopItems) {
             <div class="col-sm-3 p-0">
                 <div class="card">
-                    <img class="card-img-top shop-card-img" src="~/images/shirt.jpg" />
+                    <img class="card-img-top shop-card-img" src="~/@item.Image" />
                     <div class="card-body">
-                        <p style="height: 3em" class="card-text mb-0 mt-0">Name</p>
-                        <h5 class="left card-title text-danger">$UnitPrice</h5>
-                        <a asp-controller="Home" asp-action="Product" asp-route-id="" class="right btn btn-sm btn-primary" >Order</a>
+                        <p style="height: 3em" class="card-text mb-0 mt-0">@item.Name</p>
+                        <h5 class="left card-title text-danger">$@item.Price</h5>
+                        <a asp-controller="Home" asp-action="Product" asp-route-id="@item.Id" class="right btn btn-sm btn-primary" >Order</a>
                         <span class=""></span>
                     </div>
                 </div>
@@ -76,13 +78,15 @@
             <h3 class="sec-head-text bg-success mb-0">Best Seller</h3>
             <div class="h-box">
                 <div class="h-container">
-                    @for(var i = 0; i < 10; i++) { 
+                    @foreach(var item in Model.SellerItems) { 
+                          <a asp-controller="Shop" asp-action="Page" asp-route-id="@item.Id">
                         <div class="h-block mr-2">
-                            <img class="img-fluid rounded-circle" src="~/images/002.jpg" />
+                            <img class="img-fluid rounded-circle" src="~/@item.Logo" />
                             <p class="text-center">
-                                <b>Seller @String.Format("00{0}", i)</b>
+                              <b>@Html.DisplayFor(m => item.Name)</b>
                             </p>
                         </div>
+                        </a>
                 }
                 </div>
             </div>

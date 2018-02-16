@@ -211,16 +211,18 @@ color: white;
 .uploader {
    position: relative;
    border: 1px solid rgba(70, 199, 160, 0.486);
-   background-color: rgba(28, 146, 121, 1);
+   /* background-color: rgba(28, 146, 121, 1); */
    
 }
 .uploader_input {
     width: 100%;
-    opacity: 0;
+    background-color: rgba(28, 146, 121, 0.932);
+    color: white; 
+    /* opacity: 0; */
 }
 .uploader:hover {
     cursor: pointer;
-    background-color: rgba(28, 146, 121, 0.6);
+   
     color: red;
 }
 .uploader_label {

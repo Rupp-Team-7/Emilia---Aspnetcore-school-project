@@ -7,9 +7,9 @@
 } 
 @await Html.PartialAsync("productNav")
 
-<div class="row">
+<h5>Product list</h5>
+<div class="row light_border">
     <div class="col-sm-11">
-        <h5>Product list</h5>
         <form class="form form-inline" asp-controller="Product" asp="Index">
             <div class="form-group" >
                 <input name="term" class="form-control form-control-sm" value=@ViewData["term"] type="text" placeholder="Code or Name">

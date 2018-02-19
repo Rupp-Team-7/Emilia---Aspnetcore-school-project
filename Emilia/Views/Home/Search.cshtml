@@ -1,14 +1,16 @@
 @model Emilia.Models.HomeViewmodel.PagingList<ShopItem>
-@using Emilia.Models.HomeViewmodel
+@using Emilia.Models.HomeViewmodel 
+@{ ViewData["Title"] = "Search Result"; }
 
-@{
-    ViewData["Title"] = "Search Result";
-}
 
 <div class="row">
     <div class="col-sm-9">
+    
+    @if(Model.Count > 0)
+    {
+        
         <div class="row">
-                @foreach(var item in Model)
+                @foreach(var item in Model) 
                 {
                 <div class="col-sm-3  mt-1 p-0">
                     <div class="card item">
@@ -18,46 +20,52 @@
                             <h6 class="card-title text-danger">$@item.Price</h6>
                             <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Ordering" asp-route-id="@item.Id">Order</a>
                         </div>
-                    </div>  
+                    </div>
                 </div>
                 }
-        </div>
-        @{
-            var hasNext = !Model.HasNext? "disabled": "";
-            var hasPrev = !Model.HasPrev? "disabled": "";
-        }
+            </div>
+            
+            var hasNext = !Model.HasNext? "disabled": ""; 
+            var hasPrev = !Model.HasPrev? "disabled": ""; 
+    
             <nav style="display:inline-block;" class="mt-2" aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item @hasPrev">
-                    <a class="page-link" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" asp-route-page="@(Model.PageIndex-1)" tabindex="-1">Previous</a>
-                 </li>
-                @for(var i = 1; i<=@Model.TotalPage; i++)
-                {
-                    <li class="page-item"><a class="page-link"asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" asp-route-page="@i">@i</a></li>
-                }
-                <li class="page-item @hasNext">
-                <a class="page-link" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" asp-route-page="@(Model.PageIndex+1)">Next</a>
-                </li>
-                <li class="ml-3">
-                    <form method="GET" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" class=" form-inline">
+                <ul class="pagination">
+                    <li class="page-item @hasPrev">
+                        <a class="page-link" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" asp-route-page="@(Model.PageIndex-1)" tabindex="-1">Previous</a>
+                    </li>
+                    
+                    @for(var i = 1; i <= @Model.TotalPage; i++) 
+                    { 
+                    <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" asp-route-page="@i">@i</a>
+                    </li>
+                    }
+                    <li class="page-item @hasNext">
+                        <a class="page-link" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" asp-route-page="@(Model.PageIndex+1)">Next</a>
+                    </li>
+                    <li class="ml-3">
+                        <form method="GET" asp-controller="Home" asp-action="Search" asp-route-keyword="@ViewData["keyword"]" asp-route-price="@ViewData["price"]" asp-route-category="@ViewData["category"]" class=" form-inline">
                             <div class="form-group">
                                 <input class="form-control" name="keyword" value="@ViewData["keyword"]" type="hidden" placeholder="Go to page">
-                                 <input class="form-control" name="price" value="@ViewData["price"]" type="hidden" placeholder="Go to page">
-                                  <input class="form-control" name="category" type="hidden" value="@ViewData["category"]" placeholder="Go to page">
-                                 <input class="form-control" name="page" type="text" placeholder="Go to page"> 
-                              <input class="btn ml-1" type="submit" value="GO">
-                        </div>
-                    </form>
-                </li>
-            </ul>
+                                <input class="form-control" name="price" value="@ViewData["price"]" type="hidden" placeholder="Go to page">
+                                <input class="form-control" name="category" type="hidden" value="@ViewData["category"]" placeholder="Go to page">
+                                <input class="form-control" name="page" type="text" placeholder="Go to page">
+                                <input class="btn ml-1" type="submit" value="GO">
+                            </div>
+                        </form>
+                    </li>
+                </ul>
             </nav>
-           
+    
+    }else
+    {
+        <div>
+            <h3 class="text-dark">No result found</h3>
+        </div>
+    }
+
     </div>
     <div class="col-sm-3">
         @await Html.PartialAsync("_SearchPatial")
     </div>
-</div>
-
-<div>
-
 </div>

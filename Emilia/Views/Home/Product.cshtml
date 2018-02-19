@@ -1,4 +1,4 @@
-@model Emilia.Models.ProductViewModel.ProductHomeViewModel;
+@model Emilia.Models.HomeViewModels.ProductHomeViewModel;
 <div class="row">
     <div class="col-sm-5">
         <div class="row">
@@ -74,7 +74,7 @@
                     <input class="form-control mr-1" type="text" disabled value="{Product ID}" > -->
                     @*<label class="form-label mr-1" for="quanity">Quanity:</label>
                     <input class="form-control mr-1" id="quanity" type="number" value="1">*@
-                    <a class="btn btn-md" asp-controller="Home" asp-action="Ordering" asp-route-ord="@pro">Order</a>
+                    <button class="btn btn-md" id="ordering">Order</button>
                 </div>
             </form>
         </div>

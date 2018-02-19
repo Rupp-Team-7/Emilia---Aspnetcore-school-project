@@ -97,7 +97,7 @@
 </form> -->
 
 @Html.Partial("_Message", msg)
-<h3>Change product infomation</h3>
+<h5>Change product infomation</h5>
     <div class=" row light_border">
         <div class="col-sm-6 ">
             <form id="form-create-product" asp-controller="Product" asp-action="Edit" asp-route-id ="@ViewBag.IdToEdit" method="POST" class="form " id="form_create_product" enctype="multipart/form-data">
@@ -166,7 +166,7 @@
             <form id="form_product_photo_uploader" method="POST" asp-controller="Upload" asp-action="Photos"  enctype="multipart/form-data">
                 <div class="uploader">
                 <input class="uploader_input" type="file" id="Files" name="Files" multiple>
-                <label class="uploader_label" >Browse</label>
+                <!-- <label class="uploader_label" >Browse</label> -->
             </div>
             <div id="photo_container">
                 <div id="newPhoto">

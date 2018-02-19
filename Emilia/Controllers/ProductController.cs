@@ -27,10 +27,44 @@ namespace Emilia.Controllers
         }
 
         // GET: /Product/index
-        public async Task<IActionResult> Index(string term)
+        public async Task<IActionResult> Index(string term, int pub,int order ,string t = null)
         {
-            var model = new ProductIndexViewModel(await db.Products.ToListAsync());
+            var sellerId = await this.GetSellerID();
+            var products = db.Products.Where(p => p.SellerId == sellerId);
+   
+            if(!String.IsNullOrEmpty(term))
+            {
+                products = products.Where(p => p.Name.Contains(term) || p.Id.ToString() == term);
+            }
+            
+            if(pub == 1)
+                products = products.Where(p => p.Published);
+            else if(pub == 2)
+                products = products.Where(p => !p.Published);            
 
+            if(order == 0)
+                products = products.OrderBy(p => p.Name);
+            else if(order == 1){
+                products = products.OrderByDescending(p => p.Name);
+            }
+
+            ViewData["term"] = term;
+            ViewData["pub"] = pub;
+            ViewData["order"] = order;
+
+             if(!String.IsNullOrEmpty(t))
+            {
+                if(t == "rec")
+                {
+                   products = products.OrderByDescending(p => p.Created).Take(15); 
+                } else if(t == "old")
+                {
+                    products = products.OrderBy(p => p.Created).Take(15);
+                     
+                }
+            }
+    
+            var model = new ProductIndexViewModel(await products.AsNoTracking().ToListAsync());
             return View(model);
         }
 

@@ -16,9 +16,9 @@ namespace Emilia.Extensions
         }
     }
 
-
     public static class ProductExtension
     {
+
         public static string FirstImage(this Product p)
         {
             if (!String.IsNullOrEmpty(p.ImgPath))

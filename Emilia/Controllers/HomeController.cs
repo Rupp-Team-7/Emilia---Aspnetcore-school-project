@@ -45,9 +45,56 @@ namespace Emilia.Controllers
         }
 
         //Get: /Search?querystring...
-        public IActionResult Search()
+        public async Task<IActionResult> Search(string keyword, string category, string price, int? page)
         {
-            return View();
+            ViewData["keyword"] = keyword;
+            ViewData["category"] = category;
+            ViewData["price"] = price;
+
+            if(keyword != null)
+                page = 1;
+
+            var query = db.Products.Where(x => x.Published);
+
+            if(!String.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(p =>p.Name.Contains(keyword));
+            }
+
+            if(!String.IsNullOrEmpty(category) && category != "all")
+            {
+                query = query.Where(p => p.category.ToString().ToLower() == category );
+            }
+
+            if(!String.IsNullOrEmpty(price) && price != "all")
+            {
+                switch(price)
+                {
+                    case "lower":
+                        query = query.Where(p => p.UnitPrice < 10);
+                        break;
+                    case "1":
+                        query = query.Where(p =>p.UnitPrice >= 10 && p.UnitPrice < 50);
+                        break;
+                    case "2":
+                        query= query.Where(p =>p.UnitPrice >= 50 && p.UnitPrice < 100);
+                        break;
+                    case "higher":
+                        query= query.Where(p =>p.UnitPrice >= 100);
+                        break;
+                }
+                query = query.OrderBy(p => p.UnitPrice);
+            }
+
+            var items = query.Select(p => new ShopItem {
+                Name = p.Name,
+                Price = p.UnitPrice,
+                Image= p.FirstImage(),
+                Id = p.Id
+            });
+            var model = await PagingList<ShopItem>.CreateAsyn(items.AsNoTracking(), page??1, 4);
+
+            return View(model);
         }
 
         public IActionResult Error()
@@ -61,6 +108,7 @@ namespace Emilia.Controllers
             var model = new ProductHomeViewModel(db.Products.Where(p=>p.Id==id).ToList(), db.ProductDetail.ToList(), db.Sellers.ToList());
             return View(model);
         }
+        
         public IActionResult Ordering(Product pro)
         {
             

@@ -1,10 +1,7 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor http
-
  @{
     var isActive = http.HttpContext.Request.Cookies["dash_active"];
 }
-
-
 
 <!DOCTYPE html>
 <html>
@@ -30,24 +27,24 @@
 <body>
      
     <div class="wrapper">
-        <nav id="dash-side" class="@isActive">
-        <nav class="navbar navbar-expand-lg bg-success pl-1 ">
-            <a style="color:white;" class="navbar-brand" href="/home/index">Back to Home</a>
+        <nav id="dash-side" class="@isActive bg-dark">
+        <nav class="navbar navbar-expand-lg bg-info pl-1 ">
+            <a class="navbar-brand text-white" href="/home/index">Back to Home</a>
         </nav>
         
         <!-- <img src="~/images/002.jpg" width="150" class="d-block mr-auto ml-auto"  alt=""> -->
             
             <div>
                 <ul class="list-unstyled">
+                    <li><a asp-controller="ShopManagement" asp-action="index" class="nav-link">My Shop</a></li>
                     <li><a asp-controller='product' asp-action="index" class="nav-link active">Product</a></li>
                     <li><a asp-controller='ordering' asp-action="detail" class="nav-link">Order</a></li>
                     <li><a href="#" class="nav-link">Promotion</a></li>
-                    <li><a asp-controller="ShopManagement" asp-action="index" class="nav-link">My Shop</a></li>
                 </ul>
             </div>
         </nav>
     
-        <div id="dash-main">
+        <div id="dash-main" class="">
             
             <nav class="navbar navbar-expand-lg bg-light pl-1 sticky-top">
                 <button id="btnNav" class="dash-btn">&larr;</button>
@@ -63,10 +60,6 @@
             
         </div>
     </div>
-
-   
-    
- 
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

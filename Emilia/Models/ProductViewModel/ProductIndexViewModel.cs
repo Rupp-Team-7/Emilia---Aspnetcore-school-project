@@ -7,7 +7,7 @@ namespace Emilia.Models.ProductViewModel
     public class ProductIndexViewModel
     {
         public List<Product> Products { get; set; }
-
+        public int Count {get {return Products.Count;}}
 
         public ProductIndexViewModel(List<Product> products)
         {

@@ -19,6 +19,6 @@ namespace Emilia.Models
         public string Logo {get; set;}   
         public DateTime CreatedDate {get; set;}
 
-        public ICollection<Product> Products {get; set;}
+        public List<Product> Products {get; set;}
     }
 }

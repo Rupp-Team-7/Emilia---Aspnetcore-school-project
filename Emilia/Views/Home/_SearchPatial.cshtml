@@ -3,15 +3,14 @@
 <hr />
 <form asp-action="Search" asp-controller="home" method="GET">
     <div class="form-inline">
-        <input class="form-control w-75" id="search" name="keyword" type="search" placeholder="Search" />
+        <input class="form-control w-75" id="search" name="keyword" type="search" value="@ViewData["keyword"]" placeholder="Search" />
         <input class="btn btn-group-vertical" type="submit" value="GO" />
     </div>
-   
     <label class="form-control-label">Category:</label>
     <select class="form-control" id="category" name="category">
         <option value="all">All</option>
         <option value="shirt">Shirt</option>
-        <option value="shoe">shoe</option>
+        <option value="shoes">shoes</option>
         <option value="cap">Cap</option>
         <option value="bag">Bag</option>
     </select>
@@ -19,10 +18,10 @@
     <label class="form-control-label">Price Range:</label>
     <select class="form-control" id="price" name="price">
         <option value="all">All</option>
-        <option value="lowest">Lowest</option>
-        <option value="1">$1-$10</option>
-        <option value="2">$10-$30</option>
-        <option value="3">Highest</option>
+        <option value="lower">Lower</option>
+        <option value="1">$10-$50</option>
+        <option value="2">$50-$100</option>
+        <option value="higher">Higher</option>
     </select>
 </form>
 

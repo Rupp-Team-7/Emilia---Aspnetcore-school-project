@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Emilia.Models;
 using Emilia.Data;
+using Emilia.Models.ProductViewModel;
 using Microsoft.EntityFrameworkCore;
 using Emilia.Extensions;
 using Emilia.Models.HomeViewmodel;
@@ -15,12 +16,10 @@ namespace Emilia.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db;
-
         public HomeController(ApplicationDbContext db)
         {
             this.db = db;
         }
-       
         //Get: /, /home/
         public async Task<IActionResult> Index()
         {
@@ -59,6 +58,12 @@ namespace Emilia.Controllers
         //GET: /home/Product/1
         public IActionResult Product(int id)
         {
+            var model = new ProductHomeViewModel(db.Products.Where(p=>p.Id==id).ToList(), db.ProductDetail.ToList(), db.Sellers.ToList());
+            return View(model);
+        }
+        public IActionResult Ordering(Product pro)
+        {
+            
             return View();
         }
     }

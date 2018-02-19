@@ -177,5 +177,23 @@ $(document).ready(function () {
             $(".btnUnpub[data-order=" + $(btn).attr('data-order') + "]").toggleClass("d-none");
         });
     });
+    $("button").click(function () {
+        //alert("#" + $(this).text());
+        if ($(this).text() == 'Delivery') {
+            $(this).attr('disabled', 'disabled');
+            $("#" + $(this).attr('id')).text("Deliveried");
+            $("#" + $(this).attr('id')).removeClass("btn-primary");
+            $("#" + $(this).attr('id')).addClass("btn-dark");
+        url = $(this).attr("href");
+        $.ajax(
+            {
+                method: "POST",
+                url: url,
+                data: { id: $(this).attr('id'), ord: true },
+                processData: true
+            });
+        }
+    });
 });
+
 

@@ -45,9 +45,26 @@ namespace Emilia.Controllers
         }
 
         //Get: /Search?querystring...
-        public IActionResult Search()
+        public async Task<IActionResult> Search(string keyword, string category, string price, int? page)
         {
-            return View();
+            if(keyword != null)
+                page = 1;
+
+            var query = db.Products.Select(p => new ShopItem {
+                Name = p.Name,
+                Price = p.UnitPrice,
+                Image= p.FirstImage(),
+                Id = p.Id
+            });
+
+            if(!String.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(p =>p.Name.Contains(keyword));
+            }
+
+            var model = await PagingList<ShopItem>.CreateAsyn(query.AsNoTracking(), page??1, 5);
+
+            return View(model);
         }
 
         public IActionResult Error()
@@ -61,6 +78,7 @@ namespace Emilia.Controllers
             var model = new ProductHomeViewModel(db.Products.Where(p=>p.Id==id).ToList(), db.ProductDetail.ToList(), db.Sellers.ToList());
             return View(model);
         }
+        
         public IActionResult Ordering(Product pro)
         {
             

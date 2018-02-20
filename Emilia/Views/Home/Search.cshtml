@@ -12,13 +12,14 @@
         <div class="row">
                 @foreach(var item in Model) 
                 {
-                <div class="col-sm-3  mt-1 p-0">
-                    <div class="card item">
-                        <img class="card-img-top" src="~/@item.Image" alt="pre-img">
+                <div class="col-sm-3 p-0">
+                    <div class="card">
+                        <img class="card-img-top shop-card-img" src="~/@item.Image" />
                         <div class="card-body">
-                            <p class="card-text">@item.Name</p>
-                            <h6 class="card-title text-danger">$@item.Price</h6>
+                            <p style="height: 3em" class="card-text mb-0 mt-0">@item.Name</p>
+                            <h5 class="left card-title text-danger">$@item.Price</h5>
                             <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Ordering" asp-route-id="@item.Id">Order</a>
+                            <span class=""></span>
                         </div>
                     </div>
                 </div>

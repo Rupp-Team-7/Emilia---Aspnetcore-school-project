@@ -13,10 +13,19 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right ml-auto">
         <ul class="navbar-nav navbar-right">
          <li class="nav-item">
-                <a asp-area="" asp-controller="ShopManagement" asp-action="Index" title="MyShop" class="nav-link">Dashboard</a>
+            @if(user.SellerID.HasValue)
+            {
+                <a asp-area="" asp-controller="ShopManagement" asp-action="Index" title="MyShop" class="nav-link text-info bg-light">My shop</a>
+            }
+            else 
+            {
+                <a asp-area="" asp-controller="ShopManagement" asp-action="CreateShop" title="MyShop" class="btn btn-link navbar-btn navbar-link">Create your own shop</a>
+            }
+
+                
             </li>
             <li class="nav-item">
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="nav-link">Hello @user.Name!</a>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="nav-link text-success bg-light"> <span class=" fa fa-user"></span>&emsp;  @user.Name!</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>

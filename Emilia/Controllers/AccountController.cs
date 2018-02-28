@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using Emilia.Models;
 using Emilia.Models.AccountViewModels;
 using Emilia.Services;
+using Emilia.Data;
 
 namespace Emilia.Controllers
 {
@@ -24,17 +26,20 @@ namespace Emilia.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext db;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            this.db = db;
         }
 
         [TempData]
@@ -221,9 +226,12 @@ namespace Emilia.Controllers
             if (ModelState.IsValid)
             {
                 Customer c = new Customer { Firstname = model.FirstName, Lastname = model.LastName};
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                    CustomerID= c.Id, Name = c.Firstname
+                   Name = c.Firstname
                  };
+
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -234,6 +242,9 @@ namespace Emilia.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
+                    c.UserId = user.Id;
+                    db.Add(c);
+                    await db.SaveChangesAsync();
                     
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");

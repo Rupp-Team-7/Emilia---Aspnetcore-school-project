@@ -14,3 +14,8 @@ GO
 GO
 Select * From Product;
 Go
+
+GO
+Select * From Customer;
+Go
+

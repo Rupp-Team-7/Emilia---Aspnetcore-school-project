@@ -16,7 +16,7 @@ namespace  Emilia.Models
 
         public Customer Customer {get; set;}
         public Seller Seller {get; set;}
-
+        
         // public int DeliveryId { get; set; }
          public Boolean Delivery { get; set; }
     }

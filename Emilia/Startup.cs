@@ -28,6 +28,16 @@ namespace Emilia
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.Configure<IISOptions>(options =>
+            //{
+            //    options.ForwardClientCertificate = false;
+            //});
+
+            //services.Configure<MvcOptions>(options =>
+            //{
+            //    options.Filters.Add(new RequireHttpsAttribute());
+            //});
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -39,18 +49,6 @@ namespace Emilia
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
-
-            // var skipSSL = Configuration.GetValue<bool>("LocalTest:skipSSL");
-            // // requires using Microsoft.AspNetCore.Mvc;
-            // services.Configure<MvcOptions>(options =>
-            // {
-            //     // Set LocalTest:skipSSL to true to skip SSL requrement in 
-            //     // debug mode. This is useful when not using Visual Studio.
-            //     if (env.IsDevelopment() && !skipSSL)
-            //     {
-            //         options.Filters.Add(new RequireHttpsAttribute());
-            //     }
-            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +64,6 @@ namespace Emilia
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.UseStaticFiles();
 
             app.UseAuthentication();

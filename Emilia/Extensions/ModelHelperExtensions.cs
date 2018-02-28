@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Emilia.Models;
 using Emilia.Models.ProductViewModel;
 
@@ -10,7 +11,8 @@ namespace Emilia.Extensions
         public static string[] GeImagePath(this CreateProductViewModel m)
         {
             if (!String.IsNullOrEmpty(m.PhotoPath))
-                return m.PhotoPath.Split(";");
+                // return m.PhotoPath.Split(";",StringSplitOptions.None);
+                 return m.PhotoPath.Split(';');
 
             return new string[0];
         }
@@ -44,7 +46,7 @@ namespace Emilia.Extensions
         public static string[] ImagePath(this Product p)
         {
             if (!String.IsNullOrEmpty(p.ImgPath))
-                return p.ImgPath.Split(";");
+                return p.ImgPath.Split(';');
 
             return new string[0];
         }

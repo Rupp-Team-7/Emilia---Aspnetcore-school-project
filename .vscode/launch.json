@@ -11,8 +11,8 @@
             "request": "launch",
             "preLaunchTask": "fast build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Emilia/bin/Debug/netcoreapp2.0/Emilia.dll",
-            //"program": "${workspaceFolder}/Emilia/bin/Debug/net461/win7-x64/Emilia.exe",
+            // "program": "${workspaceFolder}/Emilia/bin/Debug/netcoreapp2.0/Emilia.dll",
+            "program": "${workspaceFolder}/Emilia/bin/Debug/net461/win7-x64/Emilia.exe",
             "args": [],
             "cwd": "${workspaceFolder}/Emilia",
             "stopAtEntry": false,

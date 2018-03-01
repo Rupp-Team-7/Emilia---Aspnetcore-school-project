@@ -12,9 +12,10 @@ using System;
 namespace Emilia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180228032146_NewOrdering")]
+    partial class NewOrdering
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +31,8 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<int>("CustomerID");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -86,8 +89,6 @@ namespace Emilia.Data.Migrations
                     b.Property<string>("Lastname");
 
                     b.Property<string>("Phone");
-
-                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 

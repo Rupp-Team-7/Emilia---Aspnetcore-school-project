@@ -23,7 +23,7 @@ namespace Emilia.Controllers
         }
         public IActionResult Detail()
         {
-            var model = new OrderingDetailViewModel(db.Orders.ToList(),db.Products.ToList(),db.Customers.ToList());
+            var model = new OrderingDetailViewModel(db.Orders.Include(c=>c.Customer).Include(p=>p.Product).ToList());
             return View(model);
         }
         [HttpPost]

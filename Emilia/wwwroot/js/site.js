@@ -184,7 +184,7 @@ $(document).ready(function () {
             $("#" + $(this).attr('id')).text("Deliveried");
             $("#" + $(this).attr('id')).removeClass("btn-primary");
             $("#" + $(this).attr('id')).addClass("btn-dark");
-        url = $(this).attr("href");
+            url = $(this).attr("href");
         $.ajax(
             {
                 method: "POST",
@@ -193,6 +193,53 @@ $(document).ready(function () {
                 processData: true
             });
         }
+    });
+    $("#txtQty").change(function () {
+        var unitprice = $('#txtUnitPrice').text();
+        var qty = $('#txtQty').val();
+        var total = double.parseDouble(unitprice) * double.parseDouble(qty);
+        $("#txtTotalPrice").text(total);
+    });
+    $("#orderingproduct").click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+
+        var output = d.getFullYear() + '/' +
+            (month < 10 ? '0' : '') + month + '/' +
+            (day < 10 ? '0' : '') + day;
+        var s = confirm("Are You Sure!");
+        if (s = true) {
+            $.ajax(
+                {
+                    method: "POST",
+                    url: "/Home/Product",
+                    data: { ProductId: $('#txtProId').val(), Quanity: $('#txtQty').val(), TotalPrice: $('#txtTotalPrice').text(), orderDate: output, CustomerId: "1", SellerId: $('#txtSellerId').val(), Delivery: "False" },
+                    processData: true
+                }).done(function (data, code) {
+                   // alert(code);
+                    if (code === "success") {
+                        window.location.href = "/home/index";
+                    } else if (code === "nocontent") {
+                        window.location.href = "/account/login";
+                    }
+                });
+        }
+
+        //var dataObject = JSON.stringify({
+        //    ProductId: $('#txtProId').val(),
+        //    Quanity: $('#txtQty').val(),
+        //    TotalPrice: $('#txtTotalPrice').text(),
+        //    orderDate: output,
+        //    CustomerId: "1",
+        //    SellerId :$('#txtSellerId').val(),
+        //    Delivery: "False"
+        //});
+        //alert(dataObject);
+        
     });
 });
 

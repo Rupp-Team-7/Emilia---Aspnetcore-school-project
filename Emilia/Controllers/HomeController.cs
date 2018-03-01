@@ -105,7 +105,7 @@ namespace Emilia.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel{ RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         //GET: /home/Product/1
@@ -128,10 +128,14 @@ namespace Emilia.Controllers
             {
                 return NoContent();
             }
+             
+           
+            var cid =  (await db.Customers.SingleOrDefaultAsync(x => x.UserId == user.Id)).Id;
+            
             //var cus = await db.Customers.Where(s => s.Id == user.CustomerID).AsNoTracking().SingleOrDefaultAsync();
             var order = new Order
             {
-                Customer = db.Customers.Find(user.Id),
+                CustomerId = cid ,
                 Quanity = modal.Quanity,
                 SellerId = modal.SellerId,
                 TotalPrice = modal.TotalPrice,

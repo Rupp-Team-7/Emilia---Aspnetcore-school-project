@@ -19,7 +19,7 @@ namespace Emilia.Models.HomeViewmodel
         
         public CreateOrderingViewModel(Order ord)
         {
-            this.ProductId = ord.Product.Id;
+            this.ProductId = ord.Id;
             this.Quanity = ord.Quanity;
             this.TotalPrice = ord.TotalPrice;
             this.orderDate = ord.OrderDate;

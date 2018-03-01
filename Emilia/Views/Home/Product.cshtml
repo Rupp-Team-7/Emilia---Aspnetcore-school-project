@@ -1,25 +1,24 @@
-@model Emilia.Models.HomeViewModels.ProductHomeViewModel;
+@model Emilia.Models.HomeViewmodel.ProductHomeViewModel
+@using Emilia.Extensions
 <div class="row">
     <div class="col-sm-5">
         <div class="row">
-            @{ var count=1;}
             @foreach (var i in Model.Products)
             {
-                if (count == 1)
-                {
-                    count++;
-                    <div class="col-sm-12">
-                      <img class="img-fluid" src="~/@i.ImgPath" alt="" >
-                    </div>
-                }
-                else
-                {
-                 <div class="col-sm-3">
-                    <img class="img-inline" src="~/@i.ImgPath">  
-                 </div>
-                }
-            
+
+            <div class="col-sm-12">
+                <img class="img-fluid" src="~/@i.FirstImage()" alt="">
+            </div>
+
+            var imgs = i.ImagePath();
+            for (var j=1; j<imgs.Length-1; j++)
+            {
+
+            <div class="col-sm-3">
+                <img class="img-fluid" src="~/@imgs[j]">
+            </div>
             }
+         }
         </div>
     </div>
     @foreach (var pro in Model.Products)
@@ -31,7 +30,8 @@
 
         <ul class="list-group">
             <li class=" d-flex list-group-item justify-content-between align-items-center">
-                <span>Product ID</span><span>{Product id}</span>
+                <span>Product ID</span><span >@Html.DisplayFor(m=>pro.Details.Code)</span>
+                <input type="hidden" id="txtProId" value="@pro.Id"/>
             </li>
             <li class="d-flex list-group-item justify-content-between align-items-center">
                 <span>Brand Name</span><span>@Html.DisplayFor(m => pro.Details.BrandName)</span>
@@ -43,6 +43,7 @@
                 <span>Tags</span><span>@Html.DisplayFor(m => pro.Details.Tags)</span>
             </li>
             <li class=" d-flex list-group-item justify-content-between align-items-center">
+                <input type="hidden" value="@pro.SellerId" id="txtSellerId" />
                     <span>Seller</span><span><a href="go-to-seller-shop-page">@Html.DisplayFor(m => pro.Seller.Name)</a></span>
                 </li>
             <li class=" d-flex list-group-item  align-items-center">
@@ -58,23 +59,22 @@
     <div class="col-sm-7">
             <h3>Order</h3>
         <div class="snipper">
-            <img class="snipper_img" src="~/@pro.ImgPath" alt="">
+            <img class="snipper_img" src="~/@pro.FirstImage()" alt="">
             <div class="snipper_text">
                 <h6>@Html.DisplayFor(m => pro.Name)</h6>
-                <p>Unit price :@Html.DisplayFor(m => pro.UnitPrice)</p>
+                <p>Unit Price : <label id="txtUnitPrice">@pro.UnitPrice</label></p>
             </div>
         </div>
         <div>
-                @*<h6>Total price: ${Total Price}</h6>*@
-            <form action="" class="form-inline w-100">
-                @*<input type="hidden" name="productID" value="{ProductID}">
-                <input type="hidden" name="sellerID" value="{SellerID">*@
+                <h6>Total price: <span class="text-danger"><label id="txtTotalPrice">@pro.UnitPrice</label> $</span></h6>
+            <form class="form-inline w-100">
                 <div class="form-group">
                     <!-- <label class="form-label mr-1">Product:</label>
                     <input class="form-control mr-1" type="text" disabled value="{Product ID}" > -->
-                    @*<label class="form-label mr-1" for="quanity">Quanity:</label>
-                    <input class="form-control mr-1" id="quanity" type="number" value="1">*@
-                    <button class="btn btn-md" id="ordering">Order</button>
+                    <label class="form-label mr-1" for="txtQty">Quanity:</label>
+                    <input class="form-control mr-1" id="txtQty" type="number" value="1">
+                    <button class="btn btn-primary" id="orderingproduct">Order</button>
+                    
                 </div>
             </form>
         </div>

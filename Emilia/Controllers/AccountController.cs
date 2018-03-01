@@ -220,7 +220,7 @@ namespace Emilia.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                Customer c = new Customer { Firstname = model.FirstName, Lastname = model.LastName};
+                Customer c = new Customer {  Firstname = model.FirstName, Lastname = model.LastName};
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
                     CustomerID= c.Id, Name = c.Firstname
                  };

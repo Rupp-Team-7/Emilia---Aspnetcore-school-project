@@ -7,7 +7,7 @@
 <div class="row">
     @foreach (var i in Model.Orders)
     {
-        @if (i.Delivery == false)
+        if (i.Delivery == false)
         {
         <div class="col-sm-3">
             <div class="wall">
@@ -15,7 +15,7 @@
                     <h3>@Html.DisplayFor(m => i.product.Name) </h3>
                 </div>
                 <div class="wall-body">
-                    <img class="img-fluid" src="~/images/002.jpg" width="100px" height="200px"/>
+                    <img class="img-fluid" src="~/@i.product.FirstImage()" width="100px" height="200px"/>
                 </div>
                 <div class="wall-footer">
                     <h3>Customer: <small>@Html.DisplayFor(m => i.Customer.Firstname) @Html.DisplayFor(m => i.Customer.Lastname)</small></h3>
@@ -37,7 +37,7 @@
                     <h3>@Html.DisplayFor(m => i.product.Name) </h3>
                 </div>
                 <div class="wall-body">
-                    <img class="img-fluid" src="~/images/002.jpg" width="100px" height="200px" />
+                    <img class="img-fluid" src="~/@i.product.FirstImage()" width="100px" height="200px" />
                 </div>
                 <div class="wall-footer">
                     <h3>Customer: <small>@Html.DisplayFor(m => i.Customer.Lastname)</small></h3>

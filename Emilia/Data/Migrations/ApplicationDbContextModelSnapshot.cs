@@ -103,23 +103,23 @@ namespace Emilia.Data.Migrations
 
                     b.Property<bool>("Delivery");
 
+                    b.Property<DateTime>("OrderDate");
+
+                    b.Property<int>("ProductId");
+
                     b.Property<int>("Quanity");
 
                     b.Property<int>("SellerId");
 
                     b.Property<decimal>("TotalPrice");
 
-                    b.Property<DateTime>("orderDate");
-
-                    b.Property<int?>("productId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Order");
                 });
@@ -319,14 +319,15 @@ namespace Emilia.Data.Migrations
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Emilia.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Emilia.Models.Seller", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Emilia.Models.Product", "product")
-                        .WithMany()
-                        .HasForeignKey("productId");
                 });
 
             modelBuilder.Entity("Emilia.Models.Product", b =>

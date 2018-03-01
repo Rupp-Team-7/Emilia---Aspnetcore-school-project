@@ -40,36 +40,6 @@
             </div>
         </form>
         <div  id="product_panel" >
-            <!-- <ul>
-                @foreach(var item in Model.Products)
-                {
-                    <li class="product_item clearfix">
-                            <img  src="~/@item.FirstImage()" alt="">
-                            <div class="product_detail_wrapper">
-                                <span>@Html.DisplayFor(m => item.Id)</span>
-                                <span>@Html.DisplayFor(m => item.Name)</span>
-                                <span>@Html.DisplayFor(m => item.category)</span>
-                                <span>$@Html.DisplayFor(m => item.UnitPrice)</span>
-                                <span>@Html.DisplayFor(m => item.Created)</span>
-                                <span class="text-muted">@item.ImageCount() Photo</span>
-                            </div>
-                            <div class=" float-right">
-                                <a class=" fa fa-info " asp-controller="product" asp-action="detail" asp-route-id="@item.Id"></a>
-                                <a class=" fa fa-edit" asp-controller="product" asp-action="edit" asp-route-id="@item.Id"></a>
-                                <a class=" fa fa-trash" asp-controller="product" asp-action="delete" asp-route-id="@item.Id"></a>
-                            </div>
-                           @if(item.Published)
-                           {
-                               <a id="btnUnpub" class="btn btn-link" asp-controller="product" asp-action="publish" asp-route-id="@item.Id">Unpublish</a> 
-                           }else {
-                               <a id="btnUnpub" class="btn btn-link" asp-controller="product" asp-action="publish" asp-route-id="@item.Id">Unpublish</a> 
-                            <a id="btnPub" class="" asp-controller="product" asp-action="publish" asp-route-id="@item.Id">publish</a>
-                           }
-                        </li>
-                }
-                
-            </ul> -->
-
             <table class="table table-striped">
                 @foreach(var item in Model.Products)
                 {
@@ -82,7 +52,7 @@
                         <td >@Html.DisplayFor(m => item.Name)</td>
                         <td >@Html.DisplayFor(m => item.category)</td>
                         <td ><span>$</span>@Html.DisplayFor(m => item.UnitPrice)</td>
-                        <td >@Html.DisplayFor(m => item.Created)</td>
+                        <td >@item.Created.ToShortDateString()</td>
                         <td>
                             <!-- <a class=" fa fa-info " asp-controller="product" asp-action="detail" asp-route-id="@item.Id"></a>
                             <a class=" fa fa-edit" asp-controller="product" asp-action="edit" asp-route-id="@item.Id"></a>

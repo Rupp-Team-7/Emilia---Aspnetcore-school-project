@@ -13,6 +13,5 @@ namespace Emilia.Models
         public string Name { get; set; }
         
         public int? SellerID {get; set;}
-        public int CustomerID {get;set;}
     }
 }

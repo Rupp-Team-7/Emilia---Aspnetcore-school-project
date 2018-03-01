@@ -135,7 +135,7 @@ namespace Emilia.Controllers
             //var cus = await db.Customers.Where(s => s.Id == user.CustomerID).AsNoTracking().SingleOrDefaultAsync();
             var order = new Order
             {
-                CustomerId = user.CustomerID,
+                CustomerId = cid,
                 Quanity = modal.Quanity,
                 SellerId = modal.SellerId,
                 TotalPrice = modal.TotalPrice,

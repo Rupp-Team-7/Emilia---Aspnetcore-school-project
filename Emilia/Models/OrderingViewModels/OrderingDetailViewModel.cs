@@ -8,14 +8,12 @@ namespace Emilia.Models.OrderingViewModels
     public class OrderingDetailViewModel
     {
         public List<Order> Orders {get;set;}
-        public List<Product> Products { get; set; }
-        public List<Customer> Customers { get; set; }
 
-        public OrderingDetailViewModel(List<Order> od,List<Product> pro,List<Customer> cus)
+
+        public OrderingDetailViewModel(List<Order> od)
         {
             this.Orders = od;
-            this.Customers = cus;
-            this.Products = pro;
+
         }
     }
 }

@@ -12,9 +12,10 @@ using System;
 namespace Emilia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180228022055_changeProduct")]
+    partial class changeProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +31,8 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<int>("CustomerID");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -87,8 +90,6 @@ namespace Emilia.Data.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
@@ -103,8 +104,6 @@ namespace Emilia.Data.Migrations
 
                     b.Property<bool>("Delivery");
 
-                    b.Property<DateTime>("OrderDate");
-
                     b.Property<int>("ProductId");
 
                     b.Property<int>("Quanity");
@@ -112,6 +111,8 @@ namespace Emilia.Data.Migrations
                     b.Property<int>("SellerId");
 
                     b.Property<decimal>("TotalPrice");
+
+                    b.Property<DateTime>("orderDate");
 
                     b.HasKey("Id");
 
@@ -319,7 +320,7 @@ namespace Emilia.Data.Migrations
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Emilia.Models.Product", "Product")
+                    b.HasOne("Emilia.Models.Product", "product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);

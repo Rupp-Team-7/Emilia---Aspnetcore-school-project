@@ -10,15 +10,21 @@ using Emilia.Models.ProductViewModel;
 using Microsoft.EntityFrameworkCore;
 using Emilia.Extensions;
 using Emilia.Models.HomeViewmodel;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Emilia.Controllers
 {
+    
     public class HomeController : Controller
     {
         private ApplicationDbContext db;
-        public HomeController(ApplicationDbContext db)
+        private UserManager<ApplicationUser> manager;
+        public HomeController(ApplicationDbContext db, UserManager<ApplicationUser> manager)
         {
             this.db = db;
+            this.manager = manager;
         }
         //Get: /, /home/
         public async Task<IActionResult> Index()
@@ -99,20 +105,58 @@ namespace Emilia.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel{ RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         //GET: /home/Product/1
         public IActionResult Product(int id)
         {
-            var model = new ProductHomeViewModel(db.Products.Where(p=>p.Id==id).ToList(), db.ProductDetail.ToList(), db.Sellers.ToList());
+            var model = new ProductHomeViewModel(db.Products.Include(pd=>pd.Details).Include(s=>s.Seller).Where(p=>p.Id==id).ToList());
             return View(model);
         }
         
-        public IActionResult Ordering(Product pro)
+        [HttpPost]
+        public async Task<IActionResult> Product(CreateOrderingViewModel modal)
         {
+
+            if(!ModelState.IsValid)
+            {
+
+            }
+            var user = await manager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return NoContent();
+            }
+             
+           
+            var cid =  (await db.Customers.SingleOrDefaultAsync(x => x.UserId == user.Id)).Id;
             
-            return View();
+            //var cus = await db.Customers.Where(s => s.Id == user.CustomerID).AsNoTracking().SingleOrDefaultAsync();
+            var order = new Order
+            {
+                CustomerId = cid,
+                Quanity = modal.Quanity,
+                SellerId = modal.SellerId,
+                TotalPrice = modal.TotalPrice,
+                OrderDate = modal.orderDate,
+                ProductId = modal.ProductId,
+                Delivery = modal.Delivery
+
+            };
+
+            db.Orders.Add(order);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+            }
+            
+        
+            return Ok();
         }
     }
 }

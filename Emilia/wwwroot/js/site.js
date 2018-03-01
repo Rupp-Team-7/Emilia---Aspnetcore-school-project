@@ -194,12 +194,15 @@ $(document).ready(function () {
             });
         }
     });
+
+
     $("#txtQty").change(function () {
         var unitprice = $('#txtUnitPrice').text();
         var qty = $('#txtQty').val();
         var total = double.parseDouble(unitprice) * double.parseDouble(qty);
         $("#txtTotalPrice").text(total);
     });
+
     $("#orderingproduct").click(function (e) {
         e.preventDefault();
         var url = $(this).attr("href");

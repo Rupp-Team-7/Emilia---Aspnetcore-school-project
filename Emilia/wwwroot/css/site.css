@@ -447,7 +447,7 @@ li.product_item:hover a {
 .wall{
     width:100%;
     display:inline-block;
-    background:#fff;
+    background:#cccccc;
     border:1px solid #d1d1d1;
     box-shadow:#a9a9a9 1px 1px 1px ;
     border-top-left-radius:5px;
@@ -465,7 +465,7 @@ li.product_item:hover a {
     display: block;
     font-size: 18px;
     font-weight:150;
-    color: #73879C;
+    
 }
 .wall-body {
     margin: 2px 0 4px;
@@ -480,6 +480,9 @@ li.product_item:hover a {
     float:left;
     display: inline-block;
     border-top: 2px solid #dedede;
+}
+.bg-own{
+    background-color:#bf04ff;
 }
 
 

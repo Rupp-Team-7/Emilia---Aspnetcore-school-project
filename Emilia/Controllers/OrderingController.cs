@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Emilia.Models;
-using Emilia.Data;
-using Emilia.Models.OrderingViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Emilia.Data;
+using Emilia.Models;
+using Emilia.Models.OrderingViewModels;
 
 namespace Emilia.Controllers
 {
     public class OrderingController : Controller
     {
         private ApplicationDbContext db;
-        public OrderingController(ApplicationDbContext db)
+        private UserManager<ApplicationUser> manager;
+
+        public OrderingController(ApplicationDbContext db, UserManager<ApplicationUser> manager)
         {
             this.db = db;
+            this.manager = manager;
         }
         public IActionResult Index()
         {
@@ -35,9 +42,24 @@ namespace Emilia.Controllers
             db.SaveChangesAsync();
             return View("Detail");
         }
-        public IActionResult History()
+        public async Task<IActionResult> History()
         {
-            return View();
+            var cusid = await GetCusID();
+            var his = await db.Orders.Include(o=>o.Product).Include(s=>s.Seller).Include(c=>c.Customer).Where(o => o.CustomerId == cusid).ToListAsync();
+            var model = new OrderingDetailViewModel(his);
+            return View(model);
+        }
+
+
+
+        private async Task<int> GetCusID()
+        {
+            var user = await manager.GetUserAsync(HttpContext.User);
+            var customer = await db.Customers.Where(c =>c.UserId == user.Id).AsNoTracking().SingleOrDefaultAsync();
+
+            if (customer == null)
+                return -1;
+            return customer.Id;
         }
     }
 }

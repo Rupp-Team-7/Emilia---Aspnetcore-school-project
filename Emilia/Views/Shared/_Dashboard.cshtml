@@ -1,4 +1,4 @@
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor http
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor http
  @{
     var isActive = http.HttpContext.Request.Cookies["dash_active"];
 }
@@ -46,9 +46,9 @@
     
         <div id="dash-main" class="">
             
-            <nav class="navbar navbar-expand-lg bg-light pl-1 sticky-top">
-                <button id="btnNav" class="dash-btn">&larr;</button>
-                <span class="pr-2">|</span> <a class="navbar-brand" href="/dashboard/index">Dashboard</a>
+            <nav class="navbar navbar-expand-lg bg-info pl-1 sticky-top">
+                <button id="btnNav" class="dash-btn text-white">&larr;</button>
+                <span class="pr-2">|</span> <a class="navbar-brand text-white" href="/dashboard/index">Dashboard</a>
                 <div id="collapserbar" class="collapse navbar-collapse">
                     @await Html.PartialAsync("_LoginPartial")
                 </div>

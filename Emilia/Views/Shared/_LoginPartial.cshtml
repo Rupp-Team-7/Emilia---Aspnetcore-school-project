@@ -15,7 +15,7 @@
          <li class="nav-item">
             @if(user.SellerID.HasValue)
             {
-                <a asp-area="" asp-controller="ShopManagement" asp-action="Index" title="MyShop" class="nav-link text-info bg-light">My shop</a>
+                <a asp-area="" asp-controller="ShopManagement" asp-action="Index" title="MyShop" class="nav-link text-white">My shop</a>
             }
             else 
             {
@@ -25,10 +25,13 @@
                 
             </li>
             <li class="nav-item">
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="nav-link text-success bg-light"> <span class=" fa fa-user"></span>&emsp;  @user.Name!</a>
+                <a asp-controller="Ordering" asp-action="History" title="MyShop" class="btn btn-link navbar-btn navbar-link text-white">My Ordered</a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="nav-link text-white"> <span class=" fa fa-user"></span>&emsp;  @user.Name!</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link text-white">Log out</button>
             </li>
         </ul>
     </form>

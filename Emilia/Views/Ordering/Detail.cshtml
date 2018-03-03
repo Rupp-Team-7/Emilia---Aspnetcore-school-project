@@ -12,17 +12,17 @@
         <div class="col-sm-3">
             <div class="wall">
                 <div class="wall-head">
-                    <h3>@Html.DisplayFor(m => i.product.Name) </h3>
+                    <h3>@Html.DisplayFor(m => i.Product.Name) </h3>
                 </div>
                 <div class="wall-body">
-                    <img class="img-fluid" src="~/@i.product.FirstImage()" width="100px" height="200px"/>
+                    <img class="img-fluid" src="~/@i.Product.FirstImage()"/>
                 </div>
                 <div class="wall-footer">
                     <h3>Customer: <small>@Html.DisplayFor(m => i.Customer.Firstname) @Html.DisplayFor(m => i.Customer.Lastname)</small></h3>
                     <h3>Phone: <small>@Html.DisplayFor(m => i.Customer.Phone)</small></h3>
                     <h3>Quanity: <small>@Html.DisplayFor(m => i.Quanity)</small></h3>
                     <h3>Total Price: <small>@Html.DisplayFor(m => i.TotalPrice)$</small></h3>
-                    <h3>Order Date: <small>@Html.DisplayFor(m => i.orderDate)</small></h3>
+                    <h3>Order Date: <small>@Html.DisplayFor(m => i.OrderDate)</small></h3>
                     <br />
                     <button class="btn btn-primary" id="@i.Id">Delivery</button>
                 </div>
@@ -34,17 +34,17 @@
         <div class="col-sm-3">
             <div class="wall">
                 <div class="wall-head">
-                    <h3>@Html.DisplayFor(m => i.product.Name) </h3>
+                    <h3>@Html.DisplayFor(m => i.Product.Name) </h3>
                 </div>
                 <div class="wall-body">
-                    <img class="img-fluid" src="~/@i.product.FirstImage()" width="100px" height="200px" />
+                    <img class="img-fluid" src="~/@i.Product.FirstImage()" style="width:100px;height:200px" />
                 </div>
                 <div class="wall-footer">
                     <h3>Customer: <small>@Html.DisplayFor(m => i.Customer.Lastname)</small></h3>
                     <h3>Phone: <small>@Html.DisplayFor(m => i.Customer.Phone)</small></h3>
                     <h3>Quanity: <small>@Html.DisplayFor(m => i.Quanity)</small></h3>
                     <h3>Total Price: <small>@Html.DisplayFor(m => i.TotalPrice)$</small></h3>
-                    <h3>Order Date: <small>@Html.DisplayFor(m => i.orderDate)</small></h3>
+                    <h3>Order Date: <small>@Html.DisplayFor(m => i.OrderDate)</small></h3>
                     <br />
                     <button class="btn btn-dark" id="@i.Id" disabled>Deliveried</button>
                 </div>

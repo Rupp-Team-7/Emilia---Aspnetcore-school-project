@@ -1,30 +1,30 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-
+@model Emilia.Models.OrderingViewModels.OrderingDetailViewModel
+@using Emilia.Models
 <div class="row">
-    @for (var i = 1; i <= 9; i++)
+    @foreach(var i in Model.Orders)
     {
-        <div class="col-sm-3">
-            <div class="wall">
-                <div class="wall-head">
-                    <h3>{Prodcut Name}</h3>
-                </div>
-                <div class="wall-body">
-                    <img class="img-fluid" src="~/images/533007 (1).png" />
-                </div>
-                <div class="wall-footer">
-                    <h3>Customer: <small>{$CusName}</small></h3>
-                    <h3>Contect: <small>{$CusPhone}</small></h3>
-                    <h3>Date: <small>{$Date}</small></h3><br />
-                    <button type="button" class="btn btn-dark" disabled>Deliveried</button>
-                </div>
+    <div class="col-sm-3">
+        <div class="wall">
+            <div class="wall-head">
+                <h3>@Html.DisplayFor(m => i.Product.Name) </h3>
+            </div>
+            <div class="wall-body">
+                <img class="img-fluid" src="~/@i.Product.FirstImage()" />
+            </div>
+            <div class="wall-footer text-dark">
+                <h3>SellerName: <small>@Html.DisplayFor(m => i.Seller.Name) @Html.DisplayFor(m => i.Customer.Lastname)</small></h3>
+                <h3>Phone: <small>@Html.DisplayFor(m => i.Seller.Tel)</small></h3>
+                <h3>Quanity: <small>@Html.DisplayFor(m => i.Quanity)</small></h3>
+                <h3>Total Price: <small>@Html.DisplayFor(m => i.TotalPrice)$</small></h3>
+                <h3>Order Date: <small>@Html.DisplayFor(m => i.OrderDate)</small></h3>
+                <br />
+                @*<button class="btn btn-primary" id="@i.Id">Delivery</button>*@
             </div>
         </div>
-    }
-    <div class="col-sm-3">
-        @await Html.PartialAsync("~/Views/Home/_SearchPatial")
     </div>
+    }
 </div>
 

@@ -12,8 +12,10 @@ select * from Seller;
 GO
 
 GO
-Select * From Product;
+Select * From [Order];
 Go
+
+
 
 GO
 Select * From Customer;

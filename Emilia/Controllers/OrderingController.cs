@@ -42,6 +42,8 @@ namespace Emilia.Controllers
             db.SaveChangesAsync();
             return View("Detail");
         }
+
+        [Authorize]
         public async Task<IActionResult> History()
         {
             var cusid = await GetCusID();

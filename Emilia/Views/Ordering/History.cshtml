@@ -20,6 +20,13 @@
                 <h3>Quanity: <small>@Html.DisplayFor(m => i.Quanity)</small></h3>
                 <h3>Total Price: <small>@Html.DisplayFor(m => i.TotalPrice)$</small></h3>
                 <h3>Order Date: <small>@Html.DisplayFor(m => i.OrderDate)</small></h3>
+                @if(i.Delivery == true)
+                {
+                    <span class="text-success fa fa-check">Check out</span>
+                }else 
+                {
+                    <span class="text-danger fa fa-cross">Pending</span>
+                }
                 <br />
                 @*<button class="btn btn-primary" id="@i.Id">Delivery</button>*@
             </div>

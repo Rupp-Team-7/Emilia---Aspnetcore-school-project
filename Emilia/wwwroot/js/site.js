@@ -225,7 +225,7 @@ $(document).ready(function () {
                 }).done(function (data, code) {
                    // alert(code);
                     if (code === "success") {
-                        window.location.href = "/home/index";
+                        window.location.href = "/Ordering/History";
                     } else if (code === "nocontent") {
                         window.location.href = "/account/login";
                     }

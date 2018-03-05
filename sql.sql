@@ -21,3 +21,7 @@ GO
 Select * From Customer;
 Go
 
+GO
+Select * From [Order];
+Go
+
